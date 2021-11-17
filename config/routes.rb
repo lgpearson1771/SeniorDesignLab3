@@ -54,4 +54,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get 'poll_signup/:id' => 'users#poll'
+  post 'poll_signup/:id' => 'users#add_poll'
 end
