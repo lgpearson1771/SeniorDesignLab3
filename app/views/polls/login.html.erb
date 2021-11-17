@@ -1,1 +1,15 @@
-<h1>Congrats bro... You made it to the login screen</h1>
+<h1> Welcome to DoodleHub</h1>
+<h3>**Name is negotiable**</h3>
+<br/>
+<h2>Admin Login</h2>
+<!--  @ALEX How to apply a class to the below:-->
+<!--Username: <%#= text_field_tag(:username, nil, :placeholder => "Enter username here", :class => "oval") %>-->
+<%= form_tag( {controller: polls_path}, {method: :get}) do %>
+<h3>
+Username: <%= text_field_tag(:username, nil, :placeholder => "Enter username here") %>
+  <br/>
+Password: <%= password_field_tag(:password, nil, :placeholder => "Enter password here") %>
+  <br/>
+<%= submit_tag("Login", id: :login) %>
+</h3>
+<% end %>
