@@ -1,3 +1,39 @@
-<h1>My Polls</h1>
+<h1>Welcome,
+<%= @admin.username %>
+  <br/>
+  <br/>
+My Polls</h1>
 
-<!--This will display the table of all polls created from this admin-->
+<table>
+  <tr>
+    <th>Title of Poll</th>
+    <th>Description</th>
+    <th>Votes Per User</th>
+    <th>Votes Per Timeslot</th>
+    <th>Timezone</th>
+    <th>Location</th>
+    <th></th>
+  </tr>
+<!--  <tr>-->
+    <%#= form_tag( {controller: polls_path}, {method: "get"}) do %>
+<!--      <td><%#= text_field_tag(:search_title, nil, :placeholder => "Poll title") %></td>-->
+<!--      <td><%#= submit_tag("Filter", id:"Filter") %></td>-->
+    <%# end %>
+<!--  </tr>-->
+</table>
+<table>
+  <tbody>
+
+  <% @polls.each do |poll| %>
+    <tr>
+      <td><%= poll.title %></td>
+      <td><%= poll.description %></td>
+      <td><%= poll.votes_per_user %></td>
+      <td><%= poll.votes_per_timeslot %></td>
+      <td><%= poll.timezone %></td>
+      <td><%= poll.location %></td>
+    </tr>
+  <% end %>
+
+  </tbody>
+</table>

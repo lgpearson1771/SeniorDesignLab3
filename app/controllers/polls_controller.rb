@@ -1,6 +1,8 @@
 class PollsController < ApplicationController
   def index
     authenticate(params[:username], params[:password])
+    @polls = Poll.where({ admin_id: session[:admin_id] })
+    @admin = Admin.find(session[:admin_id])
   end
 
   def login
@@ -10,6 +12,7 @@ class PollsController < ApplicationController
   def authenticate(username, password)
     # verify a login
     # third-part auth???
+    session[:admin_id]= Admin.where({ username: username })[0].id
   end
 
   def new
