@@ -8,6 +8,9 @@
       <%= label(:title_label, "Title") %>
       <%= text_field(:poll, :title, :placeholder => "enter your poll name here", :class => "ALEX_CHANGE") %>
 
+      <%= label_tag(:location_label, "Location") %>
+      <%= text_field(:poll, :location, :placeholder => "location", :class => "ALEX_CHANGE") %>
+
       <%= label_tag(:description_label, "Description") %>
       <%= text_field(:poll, :description, :placeholder => "The poll description...", :class => "ALEX_CHANGE") %>
 
