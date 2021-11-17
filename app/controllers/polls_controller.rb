@@ -5,9 +5,15 @@ class PollsController < ApplicationController
   end
 
   def index
-    authenticate(params[:username], params[:password])
-    @polls = Poll.where({ admin_id: session[:admin_id] })
+    if session[:admin_id].nil? && !session[:admin_id].length.positive?
+      authenticate(params[:username], params[:password])
+    end
+    # authenticate(params[:username], params[:password])
     @admin = Admin.find(session[:admin_id])
+    @polls = Poll.where({ admin_id: session[:admin_id] })
+    if !params[:search_title].nil? && params[:search_title].length.positive?
+      @polls = Poll.where({ admin_id: session[:admin_id], title: params[:search_title] })
+    end
   end
 
   def login
@@ -17,7 +23,7 @@ class PollsController < ApplicationController
   def authenticate(username, password)
     # verify a login
     # third-part auth???
-    session[:admin_id]= Admin.where({ username: username })[0].id
+    session[:admin_id] = Admin.where({ username: username })[0].id
   end
 
   def new
