@@ -1,0 +1,32 @@
+<%#= render :layout => "layouts/popup" , :locals => {:title => 'some title'} do%>
+<div id="new_medicine_page_id">
+  <% provide(:title, "Create Poll") %>
+
+  <h1>Add Inventory</h1>
+  <div class="styled_form" style>
+    <%= form_tag( "/polls", :method => :post, :id => 'add_new_poll') do %>
+      <%= label(:title_label, "Title") %>
+      <%= text_field(:poll, :title, :placeholder => "enter your poll name here", :class => "ALEX_CHANGE") %>
+
+      <%= label_tag(:description_label, "Description") %>
+      <%= text_field(:poll, :scientific_name, :placeholder => "The poll description...", :class => "ALEX_CHANGE") %>
+
+      <%= label_tag(:user_votes_label, "Number of User Votes") %>
+      <%= text_field(:poll, :quantity, :class => "ALEX_CHANGE") %>
+
+      <%= label_tag(:votes_per_timeslot, "Votes per Timeslot") %>
+      <%= text_field(:poll, :student, :class => "ALEX_CHANGE") %>
+      <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
+                                     ['Central (UTC-06:00)', "CDT"],
+                                     ['Mountain (UTC-07:00)', "MDT"],
+                                     ['Pacific (UTC-08:00)', "PDT"],
+                                     ['Alaskan (UTC-09:00)', "ADT"],
+                                     ['Hawaiian (UTC-10:00)', "HST"]]) %>
+      <br>
+      <br>
+      <%= submit_tag("Create!",  name: "create_poll_button", :class => "ALEX_CHANGE", id: "create_poll_button") %>
+    <% end %>
+  </div>
+</div>
+
+<%# end %>
