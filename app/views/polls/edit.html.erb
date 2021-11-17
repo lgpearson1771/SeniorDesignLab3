@@ -9,8 +9,8 @@
       <td><%= submit_tag("Meeting Times", :class => "ALEX_CHANGE", id:"go_to_meetings") %>
     <% end %>
 
-    <div class="styled_form" style>
-      <%= form_tag( "/polls/#{:id}", :method => :put, :id => 'add_new_poll') do %>
+    <div class="ALEX_CHANGE" style>
+      <%= form_tag( "/polls/#{:id}?poll_id=#{@poll.id}", :method => :put, :id => 'add_new_poll') do %>
         <%= label(:title_label, "Title") %>
         <%= text_field(:poll, :title, :placeholder => "enter your poll name here", :class => "ALEX_CHANGE") %>
 
@@ -44,11 +44,46 @@
       <%= hidden_field_tag "properties", true %>
       <td><%= submit_tag("Properties", :class => "ALEX_CHANGE", id:"go_to_properties") %>
     <% end %>
-    <h2> <%= @poll.title %></h2>
+    <h2> <%= @poll.title %> </h2>
+    <h4> <%= @poll.location %> </h4>
+    <h5> <%= @poll.description %> </h5>
+
+    <div class="ALEX_CHANGE" style>
+      <%= form_tag( "CHANGE_ME", :method => :put, :id => 'add_new_poll') do %>
+        <%= label(:date_label, "Date") %>
+        <%= date_field_tag(:timeslot, :date) %>
+
+        <%= label(:start_label, "Start Time") %>
+        <%= time_field_tag(:timeslot, :start) %>
+
+        <%= label(:end_label, "End Time") %>
+        <%= time_field_tag(:timeslot, :end) %>
+
+        <%= radio_button :radio_button, :select, "blocks", :checked =>
+          "unchecked", :onclick => "document.getElementById('blocks').disabled = false;document.getElementById('times').disabled = true;" %>
+
+        <%= label(:end_label, "Blocks") %>
+        <%= text_field(:timeslot, :blocks, :placeholder => "number of blocks", :class => "ALEX_CHANGE", :disabled => true, id: :blocks) %>
 
 
-  <% end %>
+        <%= radio_button :radio_button, :select, "times", :checked =>
+          "unchecked", :onclick => "document.getElementById('times').disabled = false;document.getElementById('blocks').disabled = true;" %>
+
+        <%= label(:end_label, "Times") %>
+        <%= text_field(:timeslot, :times, :placeholder => "time per slot", :class => "ALEX_CHANGE", :disabled => true, id: :times) %>
+
+
+
+        <br>
+        <br>
+        <%= submit_tag("Add",  name: "add_timeslot_button", :class => "ALEX_CHANGE", id: "add_timeslot_button") %>
+      <% end %>
+
+
+<% end %>
 
 </div>
+</div>
+
 
 <%# end %>
