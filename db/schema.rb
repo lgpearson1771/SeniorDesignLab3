@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211117024748) do
+ActiveRecord::Schema.define(version: 20211117025704) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
@@ -25,6 +25,22 @@ ActiveRecord::Schema.define(version: 20211117024748) do
   end
 
   add_index "blocks", ["timeslots_id"], name: "index_blocks_on_timeslots_id"
+
+  create_table "blocks_invitees", id: false, force: :cascade do |t|
+    t.integer "block_id",   null: false
+    t.integer "invitee_id", null: false
+  end
+
+  add_index "blocks_invitees", ["block_id", "invitee_id"], name: "index_blocks_invitees_on_block_id_and_invitee_id"
+  add_index "blocks_invitees", ["invitee_id", "block_id"], name: "index_blocks_invitees_on_invitee_id_and_block_id"
+
+  create_table "invitees", force: :cascade do |t|
+    t.string  "email"
+    t.integer "votes_left"
+    t.integer "polls_id"
+  end
+
+  add_index "invitees", ["polls_id"], name: "index_invitees_on_polls_id"
 
   create_table "polls", force: :cascade do |t|
     t.string  "title"
