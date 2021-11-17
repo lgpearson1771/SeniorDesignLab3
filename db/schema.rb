@@ -11,28 +11,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211117022305) do
+ActiveRecord::Schema.define(version: 20211117025704) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
     t.string "password"
   end
 
+  create_table "blocks", force: :cascade do |t|
+    t.integer "timeslots_id"
+    t.string  "start"
+    t.string  "end"
+  end
+
+  add_index "blocks", ["timeslots_id"], name: "index_blocks_on_timeslots_id"
+
+  create_table "blocks_invitees", id: false, force: :cascade do |t|
+    t.integer "block_id",   null: false
+    t.integer "invitee_id", null: false
+  end
+
+  add_index "blocks_invitees", ["block_id", "invitee_id"], name: "index_blocks_invitees_on_block_id_and_invitee_id"
+  add_index "blocks_invitees", ["invitee_id", "block_id"], name: "index_blocks_invitees_on_invitee_id_and_block_id"
+
+  create_table "invitees", force: :cascade do |t|
+    t.string  "email"
+    t.integer "votes_left"
+    t.integer "polls_id"
+  end
+
+  add_index "invitees", ["polls_id"], name: "index_invitees_on_polls_id"
+
   create_table "polls", force: :cascade do |t|
     t.string  "title"
     t.string  "description"
+    t.string  "timezone"
+    t.string  "location"
     t.integer "votes_per_user"
     t.integer "votes_per_timeslot"
     t.integer "admin_id"
   end
 
-  create_table "timeslot", force: :cascade do |t|
+  create_table "timeslots", force: :cascade do |t|
     t.integer "polls_id"
     t.string  "start"
     t.string  "end"
     t.date    "day"
   end
 
-  add_index "timeslot", ["polls_id"], name: "index_timeslot_on_polls_id"
+  add_index "timeslots", ["polls_id"], name: "index_timeslots_on_polls_id"
 
 end
