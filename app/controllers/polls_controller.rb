@@ -32,10 +32,11 @@ class PollsController < ApplicationController
       end
       return redirect_to "/polls/new"
     end
+    redirect_to "/polls/#{poll.id}/edit?meetings=true"
   end
 
   def edit
-
+    @poll = Poll.find(params[:id])
   end
 
 end

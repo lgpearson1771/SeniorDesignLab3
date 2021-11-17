@@ -2,6 +2,8 @@ class Poll < ActiveRecord::Base
   belongs_to :admin
 
   validates :title, presence: true
+  validates_length_of :title, :minimum => 4
+
   validates :description, presence: true
   #validates :location, presence: true
 

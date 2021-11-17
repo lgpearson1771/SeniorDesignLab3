@@ -1,9 +1,9 @@
 <%#= render :layout => "layouts/popup" , :locals => {:title => 'some title'} do%>
-<div id="new_medicine_page_id">
+<div id="new_poll_page_id">
   <% provide(:title, "Create Poll") %>
 
-  <h1>Add Inventory</h1>
-  <div class="styled_form" style>
+  <h1>Create Poll</h1>
+  <div class="ALEX_CHANGE" style>
     <%= form_tag( "/polls", :method => :post, :id => 'add_new_poll') do %>
       <%= label(:title_label, "Title") %>
       <%= text_field(:poll, :title, :placeholder => "enter your poll name here", :class => "ALEX_CHANGE") %>
@@ -26,7 +26,7 @@
                                      ['Mountain (UTC-07:00)', "MDT"],
                                      ['Pacific (UTC-08:00)', "PDT"],
                                      ['Alaskan (UTC-09:00)', "ADT"],
-                                     ['Hawaiian (UTC-10:00)', "HST"]]) %>
+                                     ['Hawaiian (UTC-10:00)', "HST"]], { include_blank: true }) %>
       <br>
       <br>
       <%= submit_tag("Create!",  name: "create_poll_button", :class => "ALEX_CHANGE", id: "create_poll_button") %>
