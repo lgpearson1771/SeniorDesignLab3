@@ -1,5 +1,7 @@
 class Poll < ActiveRecord::Base
   validates :title, presence: true
+  validates_length_of :title, :minimum => 4
+
   validates :description, presence: true
   #validates :location, presence: true
 
