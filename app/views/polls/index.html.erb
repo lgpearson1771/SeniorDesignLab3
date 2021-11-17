@@ -3,7 +3,13 @@
   <br/>
   <br/>
 My Polls</h1>
-
+<br/>
+<h3>Search for a poll by title:
+<%= form_tag( {controller: polls_path}, {method: "get"}) do %>
+  <td><%= text_field_tag(:search_title, nil, :placeholder => "Poll title") %></td>
+  <td><%= submit_tag("Filter", id:"filter".to_sym) %></td>
+<% end %>
+</h3>
 <table>
   <tr>
     <th>Title of Poll</th>
@@ -14,12 +20,6 @@ My Polls</h1>
     <th>Location</th>
     <th></th>
   </tr>
-<!--  <tr>-->
-    <%#= form_tag( {controller: polls_path}, {method: "get"}) do %>
-<!--      <td><%#= text_field_tag(:search_title, nil, :placeholder => "Poll title") %></td>-->
-<!--      <td><%#= submit_tag("Filter", id:"Filter") %></td>-->
-    <%# end %>
-<!--  </tr>-->
 </table>
 <table>
   <tbody>
