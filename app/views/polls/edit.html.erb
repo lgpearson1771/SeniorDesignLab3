@@ -1,0 +1,54 @@
+<%#= render :layout => "layouts/popup" , :locals => {:title => 'some title'} do%>
+<div id="new_medicine_page_id">
+  <% provide(:title, "Edit Poll") %>
+
+  <h1>Edit Poll</h1>
+  <% if params[:properties]%>
+    <%= form_tag("/polls/#{params[:id]}/edit?meetings=true", :method => :get, :id => 'go_to_meetings_form' ) do %>
+      <%= hidden_field_tag "meetings", true %>
+      <td><%= submit_tag("Meeting Times", :class => "ALEX_CHANGE", id:"go_to_meetings") %>
+    <% end %>
+
+    <div class="styled_form" style>
+      <%= form_tag( "/polls/#{:id}", :method => :put, :id => 'add_new_poll') do %>
+        <%= label(:title_label, "Title") %>
+        <%= text_field(:poll, :title, :placeholder => "enter your poll name here", :class => "ALEX_CHANGE") %>
+
+        <%= label_tag(:location_label, "Location") %>
+        <%= text_field(:poll, :location, :placeholder => "location", :class => "ALEX_CHANGE") %>
+
+        <%= label_tag(:description_label, "Description") %>
+        <%= text_field(:poll, :description, :placeholder => "The poll description...", :class => "ALEX_CHANGE") %>
+
+        <%= label_tag(:user_votes_label, "Number of User Votes") %>
+        <%= text_field(:poll, :votes_per_user, :class => "ALEX_CHANGE") %>
+
+        <%= label_tag(:votes_per_timeslot_label, "Votes per Timeslot") %>
+        <%= text_field(:poll, :votes_per_timeslot, :class => "ALEX_CHANGE") %>
+
+        <%= label_tag(:timezone_label, "Timezone") %>
+        <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
+                                       ['Central (UTC-06:00)', "CDT"],
+                                       ['Mountain (UTC-07:00)', "MDT"],
+                                       ['Pacific (UTC-08:00)', "PDT"],
+                                       ['Alaskan (UTC-09:00)', "ADT"],
+                                       ['Hawaiian (UTC-10:00)', "HST"]]) %>
+        <br>
+        <br>
+        <%= submit_tag("Update",  name: "create_poll_button", :class => "ALEX_CHANGE", id: "create_poll_button") %>
+      <% end %>
+    </div>
+
+  <% elsif params[:meetings]%>
+    <%= form_tag("/polls/#{params[:id]}/edit?properties=true", :method => :get, :id => 'go_to_meetings_form' ) do %>
+      <%= hidden_field_tag "properties", true %>
+      <td><%= submit_tag("Properties", :class => "ALEX_CHANGE", id:"go_to_properties") %>
+    <% end %>
+    <h2> <%= @poll.title %></h2>
+
+
+  <% end %>
+
+</div>
+
+<%# end %>
