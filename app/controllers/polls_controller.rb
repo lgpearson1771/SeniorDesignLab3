@@ -1,7 +1,7 @@
 class PollsController < ApplicationController
   def index
     # authenticate(params[:username], params[:password])
-    @polls = Poll.where({ admin_id: id })
+    @polls = Poll.where({ admin_id: session[:admin_id] })
   end
 
   def login
