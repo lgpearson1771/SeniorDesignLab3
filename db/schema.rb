@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211117012620) do
+ActiveRecord::Schema.define(version: 20211117021337) do
 
   create_table "polls", force: :cascade do |t|
     t.string  "title"
@@ -21,5 +21,14 @@ ActiveRecord::Schema.define(version: 20211117012620) do
     t.integer "votes_per_user"
     t.integer "votes_per_timeslot"
   end
+
+  create_table "timeslot", force: :cascade do |t|
+    t.integer "polls_id"
+    t.string  "start"
+    t.string  "end"
+    t.date    "day"
+  end
+
+  add_index "timeslot", ["polls_id"], name: "index_timeslot_on_polls_id"
 
 end
