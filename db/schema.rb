@@ -11,28 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211117022305) do
+ActiveRecord::Schema.define(version: 20211117024748) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
     t.string "password"
   end
 
+  create_table "blocks", force: :cascade do |t|
+    t.integer "timeslots_id"
+    t.string  "start"
+    t.string  "end"
+  end
+
+  add_index "blocks", ["timeslots_id"], name: "index_blocks_on_timeslots_id"
+
   create_table "polls", force: :cascade do |t|
     t.string  "title"
     t.string  "description"
+    t.string  "timezone"
+    t.string  "location"
     t.integer "votes_per_user"
     t.integer "votes_per_timeslot"
     t.integer "admin_id"
   end
 
-  create_table "timeslot", force: :cascade do |t|
+  create_table "timeslots", force: :cascade do |t|
     t.integer "polls_id"
     t.string  "start"
     t.string  "end"
     t.date    "day"
   end
 
-  add_index "timeslot", ["polls_id"], name: "index_timeslot_on_polls_id"
+  add_index "timeslots", ["polls_id"], name: "index_timeslots_on_polls_id"
 
 end
