@@ -8,14 +8,19 @@
       <%= label(:title_label, "Title") %>
       <%= text_field(:poll, :title, :placeholder => "enter your poll name here", :class => "ALEX_CHANGE") %>
 
+      <%= label_tag(:location_label, "Location") %>
+      <%= text_field(:poll, :location, :placeholder => "location", :class => "ALEX_CHANGE") %>
+
       <%= label_tag(:description_label, "Description") %>
-      <%= text_field(:poll, :scientific_name, :placeholder => "The poll description...", :class => "ALEX_CHANGE") %>
+      <%= text_field(:poll, :description, :placeholder => "The poll description...", :class => "ALEX_CHANGE") %>
 
       <%= label_tag(:user_votes_label, "Number of User Votes") %>
-      <%= text_field(:poll, :quantity, :class => "ALEX_CHANGE") %>
+      <%= text_field(:poll, :user_votes, :class => "ALEX_CHANGE") %>
 
-      <%= label_tag(:votes_per_timeslot, "Votes per Timeslot") %>
-      <%= text_field(:poll, :student, :class => "ALEX_CHANGE") %>
+      <%= label_tag(:votes_per_timeslot_label, "Votes per Timeslot") %>
+      <%= text_field(:poll, :votes_per_timeslot, :class => "ALEX_CHANGE") %>
+
+      <%= label_tag(:timezone_label, "Timezone") %>
       <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
                                      ['Central (UTC-06:00)', "CDT"],
                                      ['Mountain (UTC-07:00)', "MDT"],
