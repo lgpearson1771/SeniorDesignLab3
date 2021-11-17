@@ -1,4 +1,9 @@
 class PollsController < ApplicationController
+
+  def poll_params
+    params.require(:poll).permit(:title, :description, :location, :votes_per_user, :votes_per_timeslot, :timezone)
+  end
+
   def index
 
   end
@@ -32,6 +37,19 @@ class PollsController < ApplicationController
 
   def edit
     @poll = Poll.find(params[:id])
+  end
+
+  def update
+    @poll = Poll.update(params[:poll_id], poll_params)
+
+    unless @poll.valid?
+      flash[:warning] = ""
+      @poll.errors.keys.each do |key|
+        flash[:warning] = flash[:warning] + "#{key} #{ @poll.errors[key].first}; "
+      end
+      return redirect_to "/polls/#{@poll.id}/edit?properties=true"
+    end
+    redirect_to "/polls/#{@poll.id}/edit?meetings=true"
   end
 
 end
