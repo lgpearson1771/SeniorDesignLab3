@@ -1,4 +1,4 @@
-class Addblocks < ActiveRecord::Migration
+class Addtimeslot < ActiveRecord::Migration
   def up
     create_table :timeslot
   end
