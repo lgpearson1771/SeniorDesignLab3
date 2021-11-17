@@ -1,10 +1,15 @@
 class PollsController < ApplicationController
   def index
-
+    authenticate(params[:username], params[:password])
   end
 
   def login
+    # renders the admin login page no functionality needed
+  end
 
+  def authenticate(username, password)
+    # verify a login
+    # third-part auth???
   end
 
   def new

@@ -11,15 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211117021337) do
+ActiveRecord::Schema.define(version: 20211117022305) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "username"
+    t.string "password"
+  end
 
   create_table "polls", force: :cascade do |t|
     t.string  "title"
     t.string  "description"
-    t.string  "timezone"
-    t.string  "location"
     t.integer "votes_per_user"
     t.integer "votes_per_timeslot"
+    t.integer "admin_id"
   end
 
   create_table "timeslot", force: :cascade do |t|
