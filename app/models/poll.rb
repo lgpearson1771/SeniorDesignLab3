@@ -1,4 +1,6 @@
 class Poll < ActiveRecord::Base
+  belongs_to :admin
+
   validates :title, presence: true
   validates :description, presence: true
   #validates :location, presence: true
