@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   def poll
     @id = params[:id]
+    invitee = Invitee.find(@id)
+    @timeslots = invitee.poll.timeslots
     @poll_name = "test poll #{@id}"
     render 'poll_signup'
   end
