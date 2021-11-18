@@ -5,7 +5,7 @@ class PollsController < ApplicationController
   end
 
   def index
-    if session[:admin_id].nil? && !session[:admin_id].length.positive?
+    if session[:admin_id].nil?
       authenticate(params[:username], params[:password])
     end
     # authenticate(params[:username], params[:password])
