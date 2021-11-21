@@ -2,12 +2,21 @@
 <div id="new_medicine_page_id">
   <% provide(:title, "Edit Poll") %>
 
-  <h1>Edit Poll</h1>
+
   <% if params[:properties]%>
-    <%= form_tag("/polls/#{params[:id]}/edit?meetings=true", :method => :get, :id => 'go_to_meetings_form' ) do %>
-      <%= hidden_field_tag "meetings", true %>
-      <td><%= submit_tag("Meeting Times", :class => "ALEX_CHANGE", id:"go_to_meetings") %>
-    <% end %>
+    <div>
+      <div class="inline">
+        <h1>Edit Poll</h1>
+      </div>
+
+      <div class="inline">
+        <%= form_tag("/polls/#{params[:id]}/edit?meetings=true", :method => :get, :id => 'go_to_meetings_form' ) do %>
+          <%= hidden_field_tag "meetings", true %>
+          <%= submit_tag("Meeting Times", :class => "ALEX_CHANGE", id:"go_to_meetings") %>
+        <% end %>
+      </div>
+    </div>
+
 
     <div class="ALEX_CHANGE" style>
       <%= form_tag( "/polls/#{:id}?poll_id=#{@poll.id}", :method => :put, :id => 'add_new_poll') do %>
@@ -40,10 +49,18 @@
     </div>
 
   <% elsif params[:meetings]%>
-    <%= form_tag("/polls/#{params[:id]}/edit?properties=true", :method => :get, :id => 'go_to_meetings_form' ) do %>
-      <%= hidden_field_tag "properties", true %>
-      <td><%= submit_tag("Properties", :class => "ALEX_CHANGE", id:"go_to_properties") %>
-    <% end %>
+    <div>
+      <div class="inline">
+        <h1>Edit Poll</h1>
+      </div>
+
+      <div class="inline">
+        <%= form_tag("/polls/#{params[:id]}/edit?properties=true", :method => :get, :id => 'go_to_meetings_form' ) do %>
+          <%= hidden_field_tag "properties", true %>
+          <%= submit_tag("Properties", :class => "ALEX_CHANGE", id:"go_to_properties") %>
+        <% end %>
+      </div>
+    </div>
 
     <div class="infoBox">
       <h1 style="margin-top: 0px; margin-bottom: 10px;"> Poll Info </h1>
