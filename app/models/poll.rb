@@ -15,4 +15,7 @@ class Poll < ActiveRecord::Base
   validates :timezone, inclusion: { in: %w(EDT CDT MDT PDT ADT HST),
                                     message: "%{value} is not a valid timezone" }
 
+  def add_times
+
+  end
 end
