@@ -4,3 +4,18 @@
   padding-left: 10px;
   padding-bottom: 10px;
 }
+
+table {
+  border-collapse: collapse;
+  border: 1px solid #ffffff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  background-color: rgb(57, 74, 99);
+  color: white;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: normal;
+}
