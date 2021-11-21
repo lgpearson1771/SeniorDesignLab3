@@ -1,4 +1,5 @@
 class PollsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def poll_params
     params.require(:poll).permit(:title, :description, :location, :votes_per_user, :votes_per_timeslot, :timezone)

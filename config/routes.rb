@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root to: 'polls#login'
+  post '/polls/:id/add_times' => 'polls#add_times'
+  post '/timeslots/create' => 'timeslots#create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
