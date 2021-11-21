@@ -68,11 +68,11 @@
         <%= label(:end_label, "End Time") %>
         <%= time_select :end, 'end_time', {minute_step: 15} %>
 
-        <%= radio_button :AM_PM_end, :select, "blocks", form: "add_new_poll", :checked =>
+        <%= radio_button :AM_PM_end, :select, "AM", form: "add_new_poll", :checked =>
           "unchecked"%>
         <%= label(:end_label, "AM") %>
 
-        <%= radio_button :AM_PM_end, :select, "times", form: "add_new_poll", :checked =>
+        <%= radio_button :AM_PM_end, :select, "PM", form: "add_new_poll", :checked =>
           "unchecked"%>
         <%= label(:end_label, "PM") %>
         </br>
@@ -91,7 +91,6 @@
         <br>
         <%= submit_tag("Add",  name: "add_timeslot_button", :class => "ALEX_CHANGE", id: "add_timeslot_button", form: "add_new_poll") %>
       <% end %>
-
 
 <% end %>
 
