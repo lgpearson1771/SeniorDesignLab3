@@ -7,5 +7,62 @@
   <%= submit_tag("Add") %>
 <%end %>
 
-<h1>Selected polls</h1>
+<table>
+  <thead>
+  <tr>
+    <td>Time</td>
+    <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
+      <td>
+        <%= day %>
+      </td>
+    <% end %>
+  </tr>
+  </thead>
+  <tbody>
+  <% tod = "  AM"%>
+  <% (1..24).each do |hour| %>
+    <% hour = hour % 12 %>
+    <% tod = "  PM" if hour == 0%>
+    <% hour = 12 if hour == 0%>
+    <% (0..59).step(15) do |minute| %>
+      <tr>
+        <td>
+          <div class="block">
+          <%= hour %>
+          <%= minute %>
+          <%= tod %>
+          </div>
+        </td>
+        <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
+          <%= form_tag( {controller: polls_path}, {:class => 'styled_form', method: "get", :id => "filter_form"}) do %><% end %>
+          <td><%= submit_tag(day, :class => "button", id:"Filter", form: "filter_form") %></td>
+
+        <% end %>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+
+  <h1>Selected polls</h1>
 <%=@polls %>
+
+<style>
+  .block {
+    height: 20px;
+    width: 80px;
+    border: #2E2F30;
+  }
+  .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+</style>
