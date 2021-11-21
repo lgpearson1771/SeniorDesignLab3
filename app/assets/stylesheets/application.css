@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+.topRibbon{
+  background-color: #161f28;
+}

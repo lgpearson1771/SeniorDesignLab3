@@ -20,7 +20,7 @@
         <%= label_tag(:description_label, "Description") %>
         <%= text_field(:poll, :description, :placeholder => "The poll description...", :class => "ALEX_CHANGE") %>
 
-        <%= label_tag(:user_votes_label, "Number of User Votes") %>
+        <%= label_tag(:user_votes_label, "Votes per User") %>
         <%= text_field(:poll, :votes_per_user, :class => "ALEX_CHANGE") %>
 
         <%= label_tag(:votes_per_timeslot_label, "Votes per Timeslot") %>
@@ -44,9 +44,16 @@
       <%= hidden_field_tag "properties", true %>
       <td><%= submit_tag("Properties", :class => "ALEX_CHANGE", id:"go_to_properties") %>
     <% end %>
-    <h2> <%= @poll.title %> </h2>
-    <h4> <%= @poll.location %> </h4>
-    <h5> <%= @poll.description %> </h5>
+
+    <div class="infoBox">
+      <h1 style="margin-top: 0px; margin-bottom: 10px;"> Poll Info </h1>
+      <h2 style="margin-top: 0px; margin-bottom: 0px;"> <%= @poll.title %> </h2>
+      <h4> Location </h4>
+      <div style="margin-top: 0px; margin-bottom: 0px;"> <%= @poll.location %> </div>
+      <h4> Description </h4>
+      <div style="margin-top: 0px; margin-bottom: 0px;"> <%= @poll.description %> </div>
+    </div>
+
 
     <div class="ALEX_CHANGE" style>
       <%= form_tag( "/timeslots/create", :method => :post, :id => 'add_new_poll') do %>
