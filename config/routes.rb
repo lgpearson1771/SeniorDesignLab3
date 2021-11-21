@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
   root to: 'polls#login'
   post '/polls/:id/add_times' => 'polls#add_times'
+  post '/timeslots/create' => 'timeslots#create'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
