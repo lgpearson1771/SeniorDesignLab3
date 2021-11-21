@@ -1,15 +1,13 @@
-<h1>Welcome,
-<%= @admin.username %>
-  <br/>
-  <br/>
-My Polls</h1>
-<br/>
-<h3>Search for a poll by title:
+<h1><%= @admin.username %>'s Polls</h1>
+<br>
+
 <%= form_tag( {controller: polls_path}, {method: "get"}) do %>
-  <td><%= text_field_tag(:search_title, nil, :placeholder => "Poll title") %></td>
-  <td><%= submit_tag("Filter", id:"filter".to_sym) %></td>
+  <div style="padding-bottom: 5px;">
+    <div class="inline-button-and-text-field"><%= text_field_tag(:search_title, nil, :placeholder => "Poll title") %></div>
+    <div class="inline-button-and-text-field"><%= submit_tag("Filter", id:"filter".to_sym) %></div>
+  </div>
 <% end %>
-</h3>
+
 <table class="tableFormat">
   <tr>
     <th>Title of Poll</th>
@@ -21,7 +19,6 @@ My Polls</h1>
   </tr>
 
   <tbody>
-
   <% @polls.each do |poll| %>
     <tr>
       <td><%= poll.title %></td>
@@ -32,6 +29,6 @@ My Polls</h1>
       <td><%= poll.location %></td>
     </tr>
   <% end %>
-
   </tbody>
 </table>
+
