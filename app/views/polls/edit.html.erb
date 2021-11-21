@@ -49,34 +49,34 @@
     <h5> <%= @poll.description %> </h5>
 
     <div class="ALEX_CHANGE" style>
-      <%= form_tag( "CHANGE_ME", :method => :put, :id => 'add_new_poll') do %>
+      <%= form_tag( "/polls/#{params[:id]}/add_times", :method => :post, :id => 'add_new_poll') do %>
         <%= label(:date_label, "Date") %>
-        <%= date_field_tag(:timeslot, :date) %>
+        <%= date_field_tag(:date, :date, form: "add_new_poll") %>
 
         <%= label(:start_label, "Start Time") %>
-        <%= time_field_tag(:timeslot, :start) %>
+        <%= time_select(:start, :start, form: "add_new_poll", minute_step: 15) %>
 
         <%= label(:end_label, "End Time") %>
-        <%= time_field_tag(:timeslot, :end) %>
+        <%= time_field_tag(:end, :end, options = {form: "add_new_poll", minute_step: 2000, step: 15}) %>
 
-        <%= radio_button :radio_button, :select, "blocks", :checked =>
-          "unchecked", :onclick => "document.getElementById('blocks').disabled = false;document.getElementById('times').disabled = true;" %>
+        <%= radio_button :radio_button, :select, "blocks", form: "add_new_poll", :checked =>
+          "unchecked", :onclick => "document.getElementById('blocks').disabled = false;document.getElementById('times').disabled = true;document.getElementById('times').value = '';" %>
 
         <%= label(:end_label, "Blocks") %>
-        <%= text_field(:timeslot, :blocks, :placeholder => "number of blocks", :class => "ALEX_CHANGE", :disabled => true, id: :blocks) %>
+        <%= text_field(:timeslot, :blocks, :placeholder => "number of blocks", :class => "ALEX_CHANGE", form: "add_new_poll", :disabled => true, id: :blocks) %>
 
 
-        <%= radio_button :radio_button, :select, "times", :checked =>
-          "unchecked", :onclick => "document.getElementById('times').disabled = false;document.getElementById('blocks').disabled = true;" %>
+        <%= radio_button :radio_button, :select, "times", form: "add_new_poll", :checked =>
+          "unchecked", :onclick => "document.getElementById('times').disabled = false;document.getElementById('blocks').disabled = true;document.getElementById('blocks').value = '';" %>
 
         <%= label(:end_label, "Times") %>
-        <%= text_field(:timeslot, :times, :placeholder => "time per slot", :class => "ALEX_CHANGE", :disabled => true, id: :times) %>
+        <%= text_field(:times, :times, :placeholder => "time per slot", :class => "ALEX_CHANGE", form: "add_new_poll", :disabled => true, id: :times) %>
 
 
 
         <br>
         <br>
-        <%= submit_tag("Add",  name: "add_timeslot_button", :class => "ALEX_CHANGE", id: "add_timeslot_button") %>
+        <%= submit_tag("Add",  name: "add_timeslot_button", :class => "ALEX_CHANGE", id: "add_timeslot_button", form: "add_new_poll") %>
       <% end %>
 
 
