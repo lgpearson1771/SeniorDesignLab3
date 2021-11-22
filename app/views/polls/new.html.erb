@@ -6,15 +6,15 @@
   <div class="ALEX_CHANGE" style>
     <%= form_tag( "/polls", :method => :post, :id => 'add_new_poll') do %>
       <%= label(:title_label, "Title") %>
-      <%= text_field(:poll, :title, :placeholder => "enter your poll name here", :class => "ALEX_CHANGE") %>
+      <%= text_field(:poll, :title, :placeholder => "Enter poll name here", :class => "ALEX_CHANGE") %>
 
       <%= label_tag(:location_label, "Location") %>
-      <%= text_field(:poll, :location, :placeholder => "location", :class => "ALEX_CHANGE") %>
+      <%= text_field(:poll, :location, :placeholder => "e.g. SC 3258", :class => "ALEX_CHANGE") %>
 
       <%= label_tag(:description_label, "Description") %>
       <%= text_field(:poll, :description, :placeholder => "The poll description...", :class => "ALEX_CHANGE") %>
 
-      <%= label_tag(:user_votes_label, "Number of User Votes") %>
+      <%= label_tag(:user_votes_label, "Votes per User") %>
       <%= text_field(:poll, :user_votes, :class => "ALEX_CHANGE") %>
 
       <%= label_tag(:votes_per_timeslot_label, "Votes per Timeslot") %>
