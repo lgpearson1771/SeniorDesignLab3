@@ -9,12 +9,10 @@ class PollsController < ApplicationController
     if session[:admin_id].nil?
       authenticate(params[:username], params[:password])
     end
-    if params[:commit] == 'Publish'           # SKETCH ABT THIS...
-      print "HERE!!!!!!!!!\n\n\n\n\n\n\n"
+    if params[:commit] == 'Publish'
+      print "This is where we will send emails to users associated to poll #{params[:publish]}\n"
     end
     if params[:commit] == 'Delete'
-      print "WE WILL DELETE THIS!!!!!!!!!\n\n\n\n\n\n\n"
-      print "deleting #{params[:delete]}"
       poll = Poll.where(id: params[:delete])[0]
       poll&.destroy
     end
