@@ -73,7 +73,7 @@
 
 
     <div class="ALEX_CHANGE" style>
-      <%= form_tag( "/timeslots/create", :method => :post, :id => 'add_new_poll') do %>
+      <%= form_tag( "/timeslots", :method => :post, :id => 'add_new_poll') do %>
         <%= label(:date_label, "Date") %>
         <%= date_field_tag(:date, :date, form: "add_new_poll", required: true) %>
         </br>
@@ -109,7 +109,7 @@
           "unchecked", :onclick => "document.getElementById('times_times').disabled = false;document.getElementById('blocks').disabled = true;document.getElementById('blocks').value = '';" %>
 
         <%= label(:end_label, "Times") %>
-        <%= select :times, :times , [ ['00', 0], ['15', 15], ['30', 30], ['45', 45]],{}, {disabled:true}%>
+        <%= select :times, :times , [['15', 15], ['30', 30], ['45', 45], ['60',60],['75',75],['90',90],['105',105],['120',120]],{}, {disabled:true}%>
         <%= hidden_field_tag :poll_id, @poll.id %>
         <br>
         <br>
@@ -126,6 +126,7 @@
             <td><%= timeslot.start %></td>
             <td><%= timeslot.end %></td>
             <td><%= timeslot.blocks.length %></td>
+            <td><%= link_to '', timeslot, :method => :delete, :class => 'close'%> </td>
           </tr>
         <% end %>
       </table>
