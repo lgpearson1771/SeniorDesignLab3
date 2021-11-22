@@ -1,7 +1,7 @@
 <H1><%=@poll_name%></H1>
 <%= @poll %>
 
-<div class="grid-container">
+<div class="grid-container" style="overflow:auto">
   <% row = 1 %>
   <div></div>
   <% (@min_time..(@max_time-15)).step(15) do |time| %>
@@ -21,8 +21,9 @@
     <% col = col + 1 %>
     <% if ! date_times[:times].nil? %>
       <% date_times[:times].each do |time| %>
-        <div class = "item " style='<%="box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #A2C1C4DD;" if time[:id].nil? && time[:row].even? %><%="background: white;" if time[:id].nil? && time[:row].odd? %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
+        <div class = "item <%="hover" unless time[:id].nil? %>" style='<%="box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #A2C1C4DD;" if time[:id].nil? && time[:row].even? %><%="background: white;" if time[:id].nil? && time[:row].odd? %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
           <%=  time[:id] %>
+          <br>
         </div>
 
       <% end %>
@@ -72,11 +73,6 @@
   .grid-container > div {
     background-color: rgba(255, 255, 255, 0.8);
     text-align: center;
-
-
-
-
-
     font-size: 30px;
   }
   .item {
@@ -90,13 +86,34 @@
     /*border: 1px solid red;*/
   }
 
-  .blur {
-    -webkit-filter: blur(1px);
-    -moz-filter: blur(1px);
-    -o-filter: blur(1px);
-    -ms-filter: blur(1px);
-    filter: blur(1px);
-    background-color: #ccc;
+  .hover{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .hover:after {
+    content: 'Sign Up »';
+    font-size: 1vw;
+    position: absolute;
+    opacity: 0;
+    bottom:0;
+    right:0;
+    padding: 10px;
+    transition: 0.5s;
+  }
+
+  .hover:hover{
+    padding-right: 24px;
+    padding-left:8px;
+  }
+
+  .hover:hover:after {
+    opacity: 1;
+    right: 10px;
+  }
+  div {
 
   }
 </style>

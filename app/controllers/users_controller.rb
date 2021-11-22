@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @poll = Poll.find(@id)
     @timeslots = @poll.timeslots.all
     # @timeslots.sort_by { |obj| obj.start }
-    @timeslots.sort{ |a,b| (a.day == b.day) ? a.start <=> b.start : a.day <=> b.day }
+    @timeslots = @timeslots.sort{ |a,b| (a.day == b.day) ? a.start <=> b.start : a.day <=> b.day }
     @min_time= 60*23 + 45
     @max_time= 0
 
