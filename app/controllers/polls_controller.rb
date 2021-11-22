@@ -14,6 +14,9 @@ class PollsController < ApplicationController
     end
     if params[:commit] == 'Delete'
       print "WE WILL DELETE THIS!!!!!!!!!\n\n\n\n\n\n\n"
+      print "deleting #{params[:delete]}"
+      poll = Poll.where(id: params[:delete])[0]
+      poll&.destroy
     end
     @admin = Admin.find(session[:admin_id])
     @polls = Poll.where({ admin_id: session[:admin_id] })

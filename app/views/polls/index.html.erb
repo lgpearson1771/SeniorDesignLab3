@@ -36,10 +36,12 @@
       <td><%= form_tag( {controller: polls_path, action: :index}, { method: :get }) do %>
           <%= submit_tag("Publish", id: :publish_poll,
                          data: { confirm: "Are you sure you want to publish this poll?" }) %>
+          <%= hidden_field_tag(:publish,  "#{poll.id}".to_sym) %>
       <% end %></td>
       <td><%= form_tag( {controller: polls_path, action: :index}, { method: :get }) do %>
-          <%= submit_tag("Delete", id: :delete_poll,
+          <%= submit_tag("Delete", id: "delete_poll[#{poll.id}]".to_sym,
                          data: { confirm: "Are you sure you want to delete this poll?" }) %>
+          <%= hidden_field_tag(:delete,  "#{poll.id}".to_sym) %>
         <% end %></td>
     </tr>
   <% end %>
