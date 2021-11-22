@@ -51,6 +51,7 @@ class PollsController < ApplicationController
   end
 
   def edit
+    @timeslots = Timeslot.where(poll_id: params[:id])
     @poll = Poll.find(params[:id])
   end
 
@@ -66,5 +67,4 @@ class PollsController < ApplicationController
     end
     redirect_to "/polls/#{@poll.id}/edit?meetings=true"
   end
-
 end
