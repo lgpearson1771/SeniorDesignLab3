@@ -19,7 +19,7 @@ button:focus {
 
 
 .highlight {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(22, 99, 215, 0.8);
   font-weight: 400;
   cursor: pointer;
   transition: color .2s ease;
