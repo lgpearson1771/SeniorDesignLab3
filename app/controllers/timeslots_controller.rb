@@ -55,4 +55,14 @@ class TimeslotsController < ApplicationController
 
     redirect_to "/polls/#{params[:poll_id]}/edit?meetings=true"
   end
+
+  def destroy
+    @timeslot = Timeslot.find(params[:id])
+    poll_id = @timeslot[:poll_id]
+    @timeslot.blocks.each do |block|
+      block.destroy
+    end
+    @timeslot.destroy
+    redirect_to "/polls/#{poll_id}/edit?meetings=true"
+  end
 end
