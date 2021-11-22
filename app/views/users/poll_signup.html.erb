@@ -1,47 +1,38 @@
 <H1><%=@poll_name%></H1>
-<%= form_tag("/poll_signup/#{@id}", method: "post") do %>
-  <%= select(:poll, :day, [["tues",1],["mon",2]], prompt: "Select the day", class: "oval") %>
-  <!--load the actual days from the polls list will be days of timeslots as selection and then the numbers are timeslot id -->
-  <%= select(:poll, :time, [["1-3",1],["4-5",2]], prompt: "Select the time", class: "oval") %>
-  <!-- list will be times of blocks as selection and then the numbers are block id -->
-  <%= submit_tag("Add") %>
-<%end %>
+<%= @poll %>
 
-<table>
-  <thead>
-  <tr>
-    <td>Time</td>
-    <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
-      <td>
-        <%= day %>
-      </td>
-    <% end %>
-  </tr>
-  </thead>
-  <tbody>
-  <% tod = "  AM"%>
-  <% (1..24).each do |hour| %>
-    <% hour = hour % 12 %>
-    <% tod = "  PM" if hour == 0%>
-    <% hour = 12 if hour == 0%>
-    <% (0..59).step(15) do |minute| %>
-      <tr>
-        <td>
-          <div class="block">
-          <%= hour %>
-          <%= minute %>
-          <%= tod %>
-          </div>
-        </td>
-        <% ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"].each do |day| %>
-          <%= form_tag( {controller: polls_path}, {:class => 'styled_form', method: "get", :id => "filter_form"}) do %><% end %>
-          <td><%= submit_tag(day, :class => "button", id:"Filter", form: "filter_form") %></td>
-
-        <% end %>
-    <% end %>
+<div class="grid-container">
+  <% row = 1 %>
+  <div></div>
+  <% (@min_time..(@max_time-15)).step(15) do |time| %>
+    <div class = "item" style='border-right: solid; border-right-color: #A2C1C4DD; grid-column: 1 / span 1; grid-row:<% row +1%> / span 1;'>
+      <%=  UsersController.print_time(time) %> - <%=  UsersController.print_time(time+15) %>
+      <% row = row + 1 %>
+    </div>
   <% end %>
-  </tbody>
-</table>
+
+
+  <% col = 1 %>
+  <% @calendar.each do |date, date_times| %>
+
+    <div class='item' style='border-bottom: solid; border-bottom-color: #A2C1C4DD; grid-column: <%= col + 1 %> / span 1; grid-row:1 / span 1;'>
+      <%= date %>
+    </div>
+    <% col = col + 1 %>
+    <% if ! date_times[:times].nil? %>
+      <% date_times[:times].each do |time| %>
+        <div class = "item " style='<%="box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #A2C1C4DD;" if time[:id].nil? && time[:row].even? %><%="background: white;" if time[:id].nil? && time[:row].odd? %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
+          <%=  time[:id] %>
+        </div>
+
+      <% end %>
+
+    <% end %>
+
+  <% end %>
+</div>
+<!--  </tbody>-->
+<!--</table>-->
 
 
   <h1>Selected polls</h1>
@@ -64,5 +55,48 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+  }
+  /*border: dotted;*/
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-auto-rows: 40px;
+    grid-gap: 1px 0px;
+    background-color: #7aa1be;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-right: solid;
+    border-radius: 25px;
+  }
+
+  .grid-container > div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+
+
+
+
+
+    font-size: 30px;
+  }
+  .item {
+    /*background: yellow;*/
+    text-align: center;
+    /*border: 1px solid red;*/
+  }
+  .item {
+    /*background: yellow;*/
+    text-align: center;
+    /*border: 1px solid red;*/
+  }
+
+  .blur {
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+    background-color: #ccc;
+
   }
 </style>

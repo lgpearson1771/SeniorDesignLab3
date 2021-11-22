@@ -1,5 +1,6 @@
 class Poll < ActiveRecord::Base
   belongs_to :admin
+  has_many :timeslots
 
   validates :title, presence: true
   validates_length_of :title, :minimum => 4
