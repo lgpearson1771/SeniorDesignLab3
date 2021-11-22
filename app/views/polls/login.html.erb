@@ -12,14 +12,13 @@
   <div class='window'>
     <div class='overlay'></div>
     <div class='content'>
-      <div class='welcome'>Hello There!</div>
-      <div class='subtitle'>We're almost done. Before using our services you need to create an account.</div>
+      <div class='welcome'>Sign In</div>
       <div class='input-fields'>
         <%= form_tag( {controller: polls_path}, {method: :get}) do %>
-          Username: <%= text_field_tag(:username, nil, :placeholder => "Enter username here", :class => "input-line full-width" ) %>
+         <%= text_field_tag(:username, nil, :placeholder => "Username", :class => "input-line full-width" ) %>
           <br>
 
-          Password: <%= password_field_tag(:password, nil, :placeholder => "Enter password here", :class => "input-line full-width") %>
+          <%= password_field_tag(:password, nil, :placeholder => "Password", :class => "input-line full-width") %>
           <br>
 
           <%= submit_tag("Login", id: :login, class: 'ghost-round full-width', style: "background: transparent") %>
