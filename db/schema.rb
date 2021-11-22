@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211121231704) do
+ActiveRecord::Schema.define(version: 20211121233444) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
@@ -54,8 +54,9 @@ ActiveRecord::Schema.define(version: 20211121231704) do
 
   create_table "timeslots", force: :cascade do |t|
     t.integer "poll_id"
-    t.date    "start"
-    t.date    "end"
+    t.string  "start"
+    t.string  "end"
+    t.date    "day"
   end
 
   add_index "timeslots", ["poll_id"], name: "index_timeslots_on_poll_id"
