@@ -167,7 +167,7 @@ button:focus {
   -webkit-flex-flow: column;
   -ms-flex-flow: column;
   flex-flow: column;
-  box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 15px 50px 10px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   height: 560px;
   width: 360px;
@@ -176,8 +176,7 @@ button:focus {
 }
 
 .overlay {
-  background: -webkit-linear-gradient(#8CA6DB, #B993D6);
-  background: linear-gradient(#8CA6DB, #B993D6);
+  background: linear-gradient(#2F528BFF, #929292);
   opacity: 0.85;
   filter: alpha(opacity=85);
   height: 560px;
