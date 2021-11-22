@@ -15,7 +15,7 @@
       <div class='welcome'>Sign In</div>
       <div class='input-fields'>
         <%= form_tag( {controller: polls_path}, {method: :get}) do %>
-         <%= text_field_tag(:username, nil, :placeholder => "Username", :class => "input-line full-width" ) %>
+          <%= text_field_tag(:username, nil, :placeholder => "Username", :class => "input-line full-width" ) %>
           <br>
 
           <%= password_field_tag(:password, nil, :placeholder => "Password", :class => "input-line full-width") %>
