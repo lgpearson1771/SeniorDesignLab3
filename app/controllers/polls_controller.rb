@@ -9,7 +9,9 @@ class PollsController < ApplicationController
     if session[:admin_id].nil?
       authenticate(params[:username], params[:password])
     end
-    # authenticate(params[:username], params[:password])
+    if params[:commit] == 'Publish'           # SKETCH ABT THIS...
+      print "HERE!!!!!!!!!\n\n\n\n\n\n\n"
+    end
     @admin = Admin.find(session[:admin_id])
     @polls = Poll.where({ admin_id: session[:admin_id] })
     if !params[:search_title].nil? && params[:search_title].length.positive?
