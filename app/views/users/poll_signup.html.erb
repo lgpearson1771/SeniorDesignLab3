@@ -1,3 +1,6 @@
+<br>
+<br>
+<br>
 <H1><%=@poll_name%></H1>
 <%= @poll %>
 
@@ -40,81 +43,4 @@
   <h1>Selected polls</h1>
 <%=@polls %>
 
-<style>
-  .block {
-    height: 20px;
-    width: 80px;
-    border: #2E2F30;
-  }
-  .button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-  }
-  /*border: dotted;*/
-  .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    grid-auto-rows: 40px;
-    grid-gap: 1px 0px;
-    background-color: #7aa1be;
-    padding: 20px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-right: solid;
-    border-radius: 25px;
-  }
 
-  .grid-container > div {
-    background-color: rgba(255, 255, 255, 0.8);
-    text-align: center;
-    font-size: 30px;
-  }
-  .item {
-    /*background: yellow;*/
-    text-align: center;
-    /*border: 1px solid red;*/
-  }
-  .item {
-    /*background: yellow;*/
-    text-align: center;
-    /*border: 1px solid red;*/
-  }
-
-  .hover{
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-  }
-
-  .hover:after {
-    content: 'Sign Up »';
-    font-size: 1vw;
-    position: absolute;
-    opacity: 0;
-    bottom:0;
-    right:0;
-    padding: 10px;
-    transition: 0.5s;
-  }
-
-  .hover:hover{
-    padding-right: 24px;
-    padding-left:8px;
-  }
-
-  .hover:hover:after {
-    opacity: 1;
-    right: 10px;
-  }
-  div {
-
-  }
-</style>
