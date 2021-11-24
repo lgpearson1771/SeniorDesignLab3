@@ -15,10 +15,14 @@
       <div class='welcome'>Sign In</div>
       <div class='input-fields'>
         <%= form_tag( {controller: polls_path}, {method: :get}) do %>
+          <br>
           <%= text_field_tag(:username, nil, :placeholder => "Username", :class => "input-line full-width" ) %>
+          <br>
           <br>
 
           <%= password_field_tag(:password, nil, :placeholder => "Password", :class => "input-line full-width") %>
+          <br>
+          <br>
           <br>
 
           <%= submit_tag("Login", id: :login, class: 'ghost-round full-width', style: "background: transparent") %>
