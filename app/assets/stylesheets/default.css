@@ -34,3 +34,7 @@ table
   background-color: rgb(47, 82, 139);
   color: white;
 }
+
+body{
+  max-width: 1200px;
+}

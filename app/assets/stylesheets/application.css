@@ -19,7 +19,7 @@
   background-color: #333;
   overflow: hidden;
   width: 100vw;
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   font-size: 18px;
