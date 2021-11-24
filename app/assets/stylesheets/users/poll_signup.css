@@ -24,6 +24,8 @@
   grid-gap: 1px 0px;
   background-color: #7aa1be;
   padding: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-right: solid;
   border-radius: 25px;
