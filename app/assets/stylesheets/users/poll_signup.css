@@ -22,7 +22,7 @@
   grid-template-columns: auto auto auto auto;
   grid-auto-rows: 40px;
   grid-gap: 1px 0px;
-  background-color: #7aa1be;
+  background-color: #e0e0e0;
   padding: 20px;
   margin-left: 50px;
   margin-right: 50px;
@@ -35,6 +35,7 @@
   background-color: rgba(255, 255, 255, 0.8);
   text-align: center;
   font-size: 30px;
+  min-width: 170px;
 }
 .item {
   /*background: yellow;*/

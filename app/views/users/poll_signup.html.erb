@@ -8,7 +8,7 @@
   <% row = 1 %>
   <div></div>
   <% (@min_time..(@max_time-15)).step(15) do |time| %>
-    <div class = "item" style='border-right: solid; border-right-color: #A2C1C4DD; grid-column: 1 / span 1; grid-row:<% row +1%> / span 1;'>
+    <div class = "item" style='border-right: solid; border-right-color: rgb(255,255,255); grid-column: 1 / span 1; grid-row:<% row +1%> / span 1;'>
       <%=  UsersController.print_time(time) %> - <%=  UsersController.print_time(time+15) %>
       <% row = row + 1 %>
     </div>
@@ -18,14 +18,14 @@
   <% col = 1 %>
   <% @calendar.each do |date, date_times| %>
 
-    <div class='item' style='border-bottom: solid; border-bottom-color: #A2C1C4DD; grid-column: <%= col + 1 %> / span 1; grid-row:1 / span 1;'>
+    <div class='item' style='border-bottom: solid; border-bottom-color: rgb(255,255,255); grid-column: <%= col + 1 %> / span 1; grid-row:1 / span 1;'>
       <%= date %>
     </div>
     <% col = col + 1 %>
     <% if ! date_times[:times].nil? %>
       <% date_times[:times].each do |time| %>
         <% url = "'/poll_signup/#{@poll.id}/?id=#{time[:id]}'" %>
-        <div onclick="window.location.href = <%= url %> " class = "item <%="hover" unless time[:id].nil? %>" style='box-sizing: border-box;<%="background-color: #4CAF50;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #A2C1C4DD;" if time[:id].nil? && time[:row].even? %><%="background: white;" if time[:id].nil? && time[:row].odd? %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
+        <div onclick="window.location.href = <%= url %> " class = "item <%="hover" unless time[:id].nil? %>" style='box-sizing: border-box;<%="background-color: #8eedbb;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #e0e0e0;" if time[:id].nil? && time[:row].even? %><%="background: white;" if time[:id].nil? && time[:row].odd? %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
           <%=  time[:id] %>
           <br>
         </div>
@@ -36,8 +36,7 @@
 
   <% end %>
 </div>
-<!--  </tbody>-->
-<!--</table>-->
+
 
 
   <h1>Selected polls</h1>
