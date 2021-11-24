@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20211121233444) do
   end
 
   create_table "blocks", force: :cascade do |t|
-    t.integer "timeslot_id"
+    t.integer "timeslots_id"
     t.string  "start"
     t.string  "end"
   end
 
-  add_index "blocks", ["timeslot_id"], name: "index_blocks_on_timeslot_id"
+  add_index "blocks", ["timeslots_id"], name: "index_blocks_on_timeslots_id"
 
   create_table "blocks_invitees", id: false, force: :cascade do |t|
     t.integer "block_id",   null: false
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(version: 20211121233444) do
   create_table "invitees", force: :cascade do |t|
     t.string  "email"
     t.integer "votes_left"
-    t.integer "poll_id"
+    t.integer "polls_id"
   end
 
-  add_index "invitees", ["poll_id"], name: "index_invitees_on_poll_id"
+  add_index "invitees", ["polls_id"], name: "index_invitees_on_polls_id"
 
   create_table "polls", force: :cascade do |t|
     t.string  "title"
@@ -53,12 +53,12 @@ ActiveRecord::Schema.define(version: 20211121233444) do
   end
 
   create_table "timeslots", force: :cascade do |t|
-    t.integer "poll_id"
+    t.integer "polls_id"
     t.string  "start"
     t.string  "end"
     t.date    "day"
   end
 
-  add_index "timeslots", ["poll_id"], name: "index_timeslots_on_poll_id"
+  add_index "timeslots", ["polls_id"], name: "index_timeslots_on_polls_id"
 
 end
