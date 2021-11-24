@@ -62,4 +62,8 @@ Rails.application.routes.draw do
   #   end
   get 'poll_signup/:id' => 'users#poll'
   post 'poll_signup/:id' => 'users#add_poll'
+  get 'signup/:id' => 'users#signup'
+  get 'thanks' => 'users#thanks'
+
+
 end

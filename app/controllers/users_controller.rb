@@ -152,6 +152,12 @@ class UsersController < ApplicationController
     render 'poll_signup'
   end
 
+  def signup
+    @block = Block.find(params[:id])
+    @timeslot = Timeslot.find(@block.timeslot_id)
+    @poll = Poll.find(@timeslot.poll_id)
+  end
+
   def add_poll
     @id = params[:id]
     #add block registration to database with block id and userid(@id)
