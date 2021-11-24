@@ -21,7 +21,8 @@
     <% col = col + 1 %>
     <% if ! date_times[:times].nil? %>
       <% date_times[:times].each do |time| %>
-        <div class = "item <%="hover" unless time[:id].nil? %>" style='<%="box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #A2C1C4DD;" if time[:id].nil? && time[:row].even? %><%="background: white;" if time[:id].nil? && time[:row].odd? %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
+        <% url = "'/poll_signup/#{@poll.id}/?id=#{time[:id]}'" %>
+        <div onclick="window.location.href = <%= url %> " class = "item <%="hover" unless time[:id].nil? %>" style='box-sizing: border-box;<%="background-color: #4CAF50;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #A2C1C4DD;" if time[:id].nil? && time[:row].even? %><%="background: white;" if time[:id].nil? && time[:row].odd? %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
           <%=  time[:id] %>
           <br>
         </div>
