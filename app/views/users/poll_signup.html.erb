@@ -4,7 +4,7 @@
 <H1><%=@poll_name%></H1>
 <%= @poll %>
 
-<div class="grid-container" style="overflow:auto">
+<div class="grid-container" style="overflow:auto; height: 75vh">
   <% row = 1 %>
   <div></div>
   <% (@min_time..(@max_time-15)).step(15) do |time| %>
@@ -37,9 +37,5 @@
   <% end %>
 </div>
 
-
-
-  <h1>Selected polls</h1>
-<%=@polls %>
 
 
