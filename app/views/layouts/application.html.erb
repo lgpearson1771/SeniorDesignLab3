@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html>
+
+<%if !params[:action].starts_with? ("login") %>
+<div class="topnav">
+  <a class="active" href="/">Log Out</a>
+  <a href="/polls">My Polls</a>
+  <a href="/polls/new">Create Poll</a>
+</div>
+<%end%>
+
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
   <title>SeniorDesignLab3</title>
