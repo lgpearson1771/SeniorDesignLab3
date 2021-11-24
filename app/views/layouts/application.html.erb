@@ -10,7 +10,10 @@
 <%end%>
 
 <head>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+  <%if ! (params[:action].starts_with?("poll") && params[:controller].starts_with?("users") ) && ! (params[:action].starts_with?("login") && params[:controller].starts_with?("polls") )%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+  <%end%>
+
   <title>SeniorDesignLab3</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -26,6 +29,7 @@
 </div>
 
 <%= yield %>
+
 
 </body>
 </html>
