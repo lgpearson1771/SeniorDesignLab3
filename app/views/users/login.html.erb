@@ -1,0 +1,31 @@
+<style>
+  body,
+  html {
+    margin: 0;
+    height: 100%;
+  }
+</style>
+
+<!--https://codepen.io/Tbgse/pen/JXrJGX-->
+<div class='bold-line'></div>
+<div class='container'>
+  <div class='window'>
+    <div class='overlay'></div>
+    <div class='content'>
+      <div class='welcome'>Sign In</div>
+      <div class='input-fields'>
+        <%= form_tag( {controller: polls_path}, {method: :get}) do %>
+          <%= text_field_tag(:username, nil, :placeholder => "Username", :class => "input-line full-width" ) %>
+          <br>
+
+          <%= password_field_tag(:password, nil, :placeholder => "Password", :class => "input-line full-width") %>
+          <br>
+
+          <%= submit_tag("Login", id: :login, class: 'ghost-round full-width', style: "background: transparent") %>
+        <% end %>
+
+      </div>
+      <div class='spacing'>or continue with <span class='highlight'>Facebook</span></div>
+    </div>
+  </div>
+</div>

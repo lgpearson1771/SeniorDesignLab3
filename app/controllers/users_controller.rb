@@ -158,6 +158,38 @@ class UsersController < ApplicationController
     @poll = Poll.find(@timeslot.poll_id)
   end
 
+  def signup_confirmation
+    @block = Block.find(params[:block_id])
+    @timeslot = @block.timeslot
+    @poll = @timeslot.poll
+    # @user =
+    # get timeslot
+    # get poll
+    # get user
+    # Check if any more blocks are available for the timeslot
+    # Check if user is allowed to sign up for any more blocks
+    #   Done by
+    #     Counting # of blocks associated to user (Through block invitees) (Even the same email is a different "user" for different polls)
+    #     Compare with number allowed in poll information
+    # If so create a new block in that timeslot
+    # associate user with that block (Through block invitees)
+    # redirect to thanks
+    # If not available
+    #   redirect back to the select page
+    #   display flash message
+    redirect_to thanks_path
+  end
+
+  def login
+    unless Poll.find_by_id(params[:id])
+      redirect_to users_error_path
+    end
+  end
+
+  def check_login
+
+  end
+
   def add_poll
     @id = params[:id]
     #add block registration to database with block id and userid(@id)
