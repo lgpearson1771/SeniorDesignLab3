@@ -184,6 +184,7 @@ class UsersController < ApplicationController
     unless Poll.find_by_id(params[:id])
       redirect_to users_error_path
     end
+    @title = Poll.find_by_id(params[:id]).title
   end
 
   def check_login
