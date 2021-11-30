@@ -1,7 +1,6 @@
 <%#= render :layout => "layouts/popup" , :locals => {:title => 'some title'} do%>
-<div id="new_medicine_page_id">
+<div id="edit_poll_page">
   <% provide(:title, "Edit Poll") %>
-
 
   <% if params[:properties]%>
     <div>
@@ -16,8 +15,6 @@
         <% end %>
       </div>
     </div>
-
-
     <div>
       <%= form_tag( "/polls/#{:id}?poll_id=#{@poll.id}", :method => :put, :id => 'add_new_poll') do %>
         <%= label(:title_label, "Title") %>
@@ -52,6 +49,9 @@
     <div>
       <div class="inline">
         <h1>Edit Poll</h1>
+        <%= button_to "polls/#{@poll.id}/invitees", :method => :get, id: 'invitee_button' do%>
+          Add More Invitees
+        <% end %>
       </div>
 
       <div class="inline">
@@ -139,3 +139,9 @@
 </div>
 </div>
 
+<script type="text/javascript">
+  $('#invitee_button').on('click',function(evt) {
+    evt.preventDefault();
+    location.href = 'invitees';
+  });
+</script>

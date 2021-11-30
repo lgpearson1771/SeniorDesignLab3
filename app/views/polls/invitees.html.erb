@@ -4,6 +4,7 @@
 
 <% @poll.invitees.each do |invitee| %>
   <%= "#{invitee.email}" %>
+  <%= link_to '', invitee, :method => :delete, :class => 'close'%>
   </br>
 <% end %>
 <button id="add_invitee"> add </button>
@@ -11,10 +12,16 @@
   <%= form_tag( "/invitees", :method => :post, :id => 'add_invitee') do %>
     <%= label(:email_label, "Email") %>
     <%= text_field :invitee, :email %>
+    <%= hidden_field_tag 'poll', @poll.id %>
     <%= submit_tag "Add" %>
   <% end %>
   <button id="cancel_add"> cancel </button>
 </section>
+
+<%= button_to "polls/#{@poll.id}/edit?meetings=true", :method => :get, id: 'back_button' do%>
+  Back
+<% end %>
+
 <script type="text/javascript">
   $('#add_invitee').on('click',function(evt) {
     $('.invitee_form').show();
@@ -22,9 +29,8 @@
   $('#cancel_add').on('click',function(evt) {
     $('.invitee_form').hide();
   });
+  $('#back_button').on('click',function(evt) {
+    evt.preventDefault();
+    location.href = 'edit?meetings=true';
+  });
 </script>
-
-
-<%= button_to polls_path, :method => :get do%>
-  Back
-<% end %>
