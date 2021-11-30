@@ -84,4 +84,10 @@ class PollsController < ApplicationController
     end
     redirect_to "/polls/#{@poll.id}/edit?meetings=true"
   end
+
+  def invitees
+    @poll = Poll.find(params[:id])
+    render "/polls/invitees"
+  end
+
 end
