@@ -12,11 +12,10 @@
 <H4><%=@block.start%> - <%=@block.end%></H4>
 
 <%= form_tag( "/signup_confirmation/#{@poll.id}", {method: :get}) do %>
-  <%= hidden_field_tag "block_id", params[:id] %>
+  <%= hidden_field_tag "block_id", params[:block_id] %>
   <%= submit_tag("Confirm", id: :login) %>
 <% end %>
 
 <%= form_tag( :back, {method: :get}) do %>
   <%= submit_tag("Cancel", id: :login) %>
 <% end %>
-<H1>Signup for <%=@poll.description%></H1>
