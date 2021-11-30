@@ -7,7 +7,11 @@ class PollsController < ApplicationController
 
   def index
     if session[:admin_id].nil?
-      authenticate(params[:username], params[:password])
+      val = authenticate(params[:username], params[:password])
+      if ['invalid username', 'invalid password/username'].include?(val)
+        redirect_to '/'
+        return
+      end
     end
     if params[:commit] == 'Publish'
       print "This is where we will send emails to users associated to poll #{params[:publish]}\n"
@@ -28,9 +32,16 @@ class PollsController < ApplicationController
   end
 
   def authenticate(username, password)
-    # verify a login
-    # third-part auth???
-    session[:admin_id] = Admin.where({ username: username })[0].id
+    user_info = Admin.where({ username: username })[0]
+    if user_info.nil? || user_info.blank?
+      flash[:warning] = 'This username does not exist'
+      'invalid username'
+    elsif password == user_info.password
+      session[:admin_id] = user_info.id
+    else
+      flash[:warning] = 'Incorrect login credentials'
+      'invalid password/username'
+    end
   end
 
   def new
@@ -47,11 +58,11 @@ class PollsController < ApplicationController
                        })
 
     unless poll.valid?
-      flash[:warning] = ""
+      flash[:warning] = ''
       poll.errors.keys.each do |key|
         flash[:warning] = flash[:warning] + "#{key} #{ poll.errors[key].first}; "
       end
-      return redirect_to "/polls/new"
+      return redirect_to '/polls/new'
     end
     redirect_to "/polls/#{poll.id}/edit?meetings=true"
   end
@@ -65,7 +76,7 @@ class PollsController < ApplicationController
     @poll = Poll.update(params[:poll_id], poll_params)
 
     unless @poll.valid?
-      flash[:warning] = ""
+      flash[:warning] = ''
       @poll.errors.keys.each do |key|
         flash[:warning] = flash[:warning] + "#{key} #{ @poll.errors[key].first}; "
       end
