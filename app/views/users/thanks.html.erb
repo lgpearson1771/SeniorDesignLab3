@@ -1,0 +1,7 @@
+<br>
+<br>
+<br>
+
+<h1> Thanks, <%= @user.email %>! </h1>
+<h4>You have <%= @user.votes_left %> out of <%= @poll.votes_per_user %> votes remaining</h4>
+<p>Would you like to <a href=<%="/poll_signup/#{@poll.id}" %>>Sign up</a> for another time slot?</p>

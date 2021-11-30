@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
+  before_action :verify_user
+
   def poll
     #   <div class="item1" style="grid-column: column-pos / span column-width; grid-row: row-pos / span row-length;">Content</div>
     @id = params[:id]
     @poll_name = "test poll #{@id}"
+    @user = Invitee.find(session[:user_id])
     require 'time'
     require 'date'
 
@@ -51,7 +54,21 @@ class UsersController < ApplicationController
       blocks = time.blocks
       blocks.each do |block|
         # min_time = @calendar[time.day][:min_time]
+        reserved = false
+        if block.invitees.find_by_id(@user.id)
+          id = block.id
+          reserved = true
+          booked = false
+        elsif block.invitees.length < @poll.votes_per_timeslot
+          id = block.id
+          booked = false
+        else
+          id = nil
+          booked = true
+        end
+
         if ! @calendar[time.day].key?(:times)
+
           day_count = day_count + 1
           start_time = get_time(block.start)
           end_time = get_time(block.end)
@@ -93,7 +110,9 @@ class UsersController < ApplicationController
           @calendar[time.day][:times] << {column: day_count,
                                           row: (start_time - @min_time) / 15 + 1 + 1,
                                           duration: (end_time - start_time) / 15,
-                                          id: block.id}
+                                          id: id,
+                                          booked: booked,
+                                          reserved: reserved}
           prev_time = end_time
           prev_day = time.day
         else
@@ -120,7 +139,9 @@ class UsersController < ApplicationController
           @calendar[time.day][:times] << {column: day_count,
                                           row: (start_time - @min_time) / 15 + 1 + 1,
                                           duration: (end_time - start_time) / 15,
-                                          id: block.id}
+                                          id: id,
+                                          booked: booked,
+                                          reserved: reserved}
           prev_time = end_time
           prev_day = time.day
         end
@@ -152,9 +173,92 @@ class UsersController < ApplicationController
     render 'poll_signup'
   end
 
+  def show
+    @block = Block.find(params[:block_id])
+    @timeslot = Timeslot.find(@block.timeslot_id)
+    @poll = Poll.find(@timeslot.poll_id)
+  end
+
+  def cancel
+    @block = Block.find(params[:block_id])
+    @timeslot = Timeslot.find(@block.timeslot_id)
+    @poll = Poll.find(@timeslot.poll_id)
+    @user = Invitee.find(session[:user_id])
+    @user.blocks.delete(@block)
+    @user.votes_left = @user.votes_left + 1
+    @user.save
+    flash[:notice] = "Reservation canceled."
+    redirect_to "/poll_signup/#{@poll.id}"
+  end
+
+  def signup
+    @block = Block.find(params[:block_id])
+    @timeslot = Timeslot.find(@block.timeslot_id)
+    @poll = Poll.find(@timeslot.poll_id)
+
+  end
+
+  def signup_confirmation
+    @block = Block.find(params[:block_id])
+    print(params)
+    @timeslot = @block.timeslot
+    @poll = @timeslot.poll
+    @user = Invitee.find(session[:user_id])
+
+    unless @user.votes_left > 0
+      flash[:warning] = "You do not have any votes left!"
+      return redirect_to "/poll_signup/#{@poll.id}"
+    end
+
+    @user.blocks << @block
+    @user.votes_left = @user.votes_left - 1
+    @user.save
+    #add block registration to database with block id and userid(@id)
+
+    #add block registration to database with block id and userid(@id)    # get timeslot
+    # get poll
+    # get user
+    # Check if any more blocks are available for the timeslot
+    # Check if user is allowed to sign up for any more blocks
+    #   Done by
+    #     Counting # of blocks associated to user (Through block invitees) (Even the same email is a different "user" for different polls)
+    #     Compare with number allowed in poll information
+    # If so create a new block in that timeslot
+    # associate user with that block (Through block invitees)
+    # redirect to thanks
+    # If not available
+    #   redirect back to the select page
+    #   display flash message
+    redirect_to thanks_path
+  end
+
+  def login
+    unless Poll.find_by_id(params[:id])
+      return redirect_to users_error_path
+    end
+    @title = Poll.find_by_id(params[:id]).title
+
+  end
+
+  def check_login
+    unless Poll.find_by_id(params[:id])
+      return redirect_to users_error_path
+    end
+    @poll = Poll.find_by_id(params[:id])
+
+    unless @poll.invitees.where(email: params[:email]).length > 0
+      return redirect_to users_error_path
+    end
+    @user = Invitee.where(email: params[:email])[0]
+    session[:user_id] = @user.id
+    # return redirect_to users_error_path
+
+    redirect_to "/poll_signup/#{@poll.id}"
+  end
+
   def add_poll
     @id = params[:id]
-    #add block registration to database with block id and userid(@id)
+    # add block registration to database with block id and userid(@id)
     # block id = params[:poll][time]
     @poll_name = "test poll #{@id}"
     render 'poll_signup'
@@ -175,5 +279,19 @@ class UsersController < ApplicationController
       min = "0#{min}"
     end
     "#{hour}:#{min}"
+  end
+
+  def thanks
+    @user = Invitee.find(session[:user_id])
+    @poll = @user.poll
+  end
+
+  def verify_user
+    @poll = Poll.find_by_id(params[:id])
+    @user = Invitee.find(session[:user_id])
+    unless @poll.invitees.find_by_id(@user.id)
+      return redirect_to users_error_path
+
+    end
   end
 end

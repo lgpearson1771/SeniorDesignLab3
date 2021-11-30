@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root to: 'polls#login'
+  get '/users/login/:id' => 'users#login'
+  get '/users/error' => 'users#error'
+  post '/users/login/:id' => 'users#check_login'
+  get '/cancel/:id' => 'users#cancel'
+
+
+
   post '/polls/:id/add_times' => 'polls#add_times'
 
   get '/polls/:id/invitees' => 'polls#invitees'
@@ -61,5 +68,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   get 'poll_signup/:id' => 'users#poll'
+  get 'users/show/:id' => 'users#show'
   post 'poll_signup/:id' => 'users#add_poll'
+  get 'signup/:id' => 'users#signup'
+  get 'signup_confirmation/:id' => 'users#signup_confirmation'
+  get 'thanks' => 'users#thanks'
+
+
 end
