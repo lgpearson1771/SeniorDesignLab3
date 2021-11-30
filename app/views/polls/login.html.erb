@@ -24,7 +24,17 @@
           <br>
           <br>
           <br>
-
+          <div style="text-align: center; font-size: large">
+            <% if flash[:notice]%>
+              <div class="notice" style="margin-bottom: 10px; margin-top: 0px; background-color:rgba(0,0,0,0); color: #3e9941;">
+                <%= flash[:notice]%>
+              </div>
+            <% elsif flash[:warning]%>
+              <div class="warning" style="margin-bottom: 10px; margin-top: 0px; background-color:rgba(0,0,0,0); color: #d53131;">
+                <%= flash[:warning]%>
+              </div>
+            <% end %>
+          </div>
           <%= submit_tag("Login", id: :login, class: 'ghost-round full-width', style: "background: transparent") %>
         <% end %>
 

@@ -46,3 +46,17 @@
   background-color: #2F528BFF;
   color: white;
 }
+
+.notice{
+  margin-top: 70px;
+  background-color: rgba(106,255,125,0.31);
+  color: green;
+  border-radius: 12px;
+}
+
+.warning{
+  margin-top: 70px;
+  background-color: rgba(255, 79, 76, 0.31);
+  color: red;
+  border-radius: 12px;
+}
