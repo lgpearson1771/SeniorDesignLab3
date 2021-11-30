@@ -34,8 +34,8 @@
       <td><%= poll.votes_per_timeslot %></td>
       <td><%= poll.timezone %></td>
       <td><%= poll.location %></td>
-      <td><%= link_to("Results", "polls/#{poll.id}", id: :poll_results) %></td>
-      <td><%= link_to("Edit", "polls/#{poll.id}/edit?meetings=true", id: :edit_poll) %></td>
+      <td><%= button_to("Results", "polls/#{poll.id}",:method => :get, id: :poll_results) %></td>
+      <td><%= button_to("Edit", "polls/#{poll.id}/edit?meetings=true", :method => :get, class: "edit_poll", id: "edit_poll_#{poll.id}") %></td>
       <td><%= form_tag( {controller: polls_path, action: :index}, { method: :get }) do %>
           <%= submit_tag("Publish", id: :publish_poll,
                          data: { confirm: "Are you sure you want to publish this poll?" }) %>
@@ -51,3 +51,10 @@
   </tbody>
 </table>
 
+<script type="text/javascript">
+  $('.edit_poll').on('click',function(evt) {
+    id = (this.id).split('_')[2]
+    evt.preventDefault();
+    location.href = '/polls/' + id + '/edit?meetings=true';
+  });
+</script>
