@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   root to: 'polls#login'
   post '/polls/:id/add_times' => 'polls#add_times'
 
+  get '/polls/:id/invitees' => 'polls#invitees'
+
   resources :timeslots
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

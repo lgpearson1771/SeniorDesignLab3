@@ -1,0 +1,8 @@
+<h1> Invite People to poll</h1>
+
+<% @invitees.each do |invitee| %>
+  <%= "#{invitee.email}" %>
+  </br>
+<% end %>
+
+<%= button_to "Back", { :action => "polls" }, :method => :get %>

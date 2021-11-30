@@ -73,4 +73,10 @@ class PollsController < ApplicationController
     end
     redirect_to "/polls/#{@poll.id}/edit?meetings=true"
   end
+
+  def invitees
+    print(params)
+    redirect_to "/polls/#{@poll.id}/invite_to_poll"
+  end
+
 end
