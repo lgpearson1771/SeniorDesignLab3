@@ -12,28 +12,28 @@
       <div class="inline">
         <%= form_tag("/polls/#{params[:id]}/edit?meetings=true", :method => :get, :id => 'go_to_meetings_form' ) do %>
           <%= hidden_field_tag "meetings", true %>
-          <%= submit_tag("Meeting Times", :class => "ALEX_CHANGE", id:"go_to_meetings") %>
+          <%= submit_tag("Meeting Times", id:"go_to_meetings") %>
         <% end %>
       </div>
     </div>
 
 
-    <div class="ALEX_CHANGE" style>
+    <div>
       <%= form_tag( "/polls/#{:id}?poll_id=#{@poll.id}", :method => :put, :id => 'add_new_poll') do %>
         <%= label(:title_label, "Title") %>
-        <%= text_field(:poll, :title, :placeholder => "enter your poll name here", :class => "ALEX_CHANGE") %>
+        <%= text_field(:poll, :title, :placeholder => "enter your poll name here") %>
 
         <%= label_tag(:location_label, "Location") %>
-        <%= text_field(:poll, :location, :placeholder => "location", :class => "ALEX_CHANGE") %>
+        <%= text_field(:poll, :location, :placeholder => "location") %>
 
         <%= label_tag(:description_label, "Description") %>
-        <%= text_field(:poll, :description, :placeholder => "The poll description...", :class => "ALEX_CHANGE") %>
+        <%= text_field(:poll, :description, :placeholder => "The poll description...") %>
 
         <%= label_tag(:user_votes_label, "Votes per User") %>
-        <%= text_field(:poll, :votes_per_user, :class => "ALEX_CHANGE") %>
+        <%= text_field(:poll, :votes_per_user) %>
 
         <%= label_tag(:votes_per_timeslot_label, "Votes per Timeslot") %>
-        <%= text_field(:poll, :votes_per_timeslot, :class => "ALEX_CHANGE") %>
+        <%= text_field(:poll, :votes_per_timeslot) %>
 
         <%= label_tag(:timezone_label, "Timezone") %>
         <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
@@ -44,7 +44,7 @@
                                        ['Hawaiian (UTC-10:00)', "HST"]]) %>
         <br>
         <br>
-        <%= submit_tag("Update",  name: "create_poll_button", :class => "ALEX_CHANGE", id: "create_poll_button") %>
+        <%= submit_tag("Update",  name: "create_poll_button", id: "create_poll_button") %>
       <% end %>
     </div>
 
@@ -57,7 +57,7 @@
       <div class="inline">
         <%= form_tag("/polls/#{params[:id]}/edit?properties=true", :method => :get, :id => 'go_to_meetings_form' ) do %>
           <%= hidden_field_tag "properties", true %>
-          <%= submit_tag("Properties", :class => "ALEX_CHANGE", id:"go_to_properties") %>
+          <%= submit_tag("Properties", id:"go_to_properties") %>
         <% end %>
       </div>
     </div>
@@ -72,7 +72,7 @@
     </div>
 
 
-    <div class="ALEX_CHANGE" style>
+    <div>
       <%= form_tag( "/timeslots", :method => :post, :id => 'add_new_poll') do %>
         <%= label(:date_label, "Date") %>
         <%= date_field_tag(:date, :date, form: "add_new_poll", required: true) %>
@@ -103,7 +103,7 @@
         <%= radio_button :time_blocks, :select, "blocks", form: "add_new_poll", :checked =>
           "checked", :onclick => "document.getElementById('times_times').disabled = true;document.getElementById('blocks').disabled = false;document.getElementById('times').value = '';" %>
         <%= label(:end_label, "Blocks") %>
-        <%= text_field(:timeslot, :blocks, :placeholder => "number of blocks", :class => "ALEX_CHANGE", form: "add_new_poll", :disabled => false, id: :blocks, required: true) %>
+        <%= text_field(:timeslot, :blocks, :placeholder => "number of blocks", form: "add_new_poll", :disabled => false, id: :blocks, required: true) %>
 
         <%= radio_button :time_blocks, :select, "times", form: "add_new_poll", :checked =>
           "unchecked", :onclick => "document.getElementById('times_times').disabled = false;document.getElementById('blocks').disabled = true;document.getElementById('blocks').value = '';" %>
@@ -113,7 +113,7 @@
         <%= hidden_field_tag :poll_id, @poll.id %>
         <br>
         <br>
-        <%= submit_tag("Add",  name: "add_timeslot_button", :class => "ALEX_CHANGE", id: "add_timeslot_button", form: "add_new_poll") %>
+        <%= submit_tag("Add",  name: "add_timeslot_button", id: "add_timeslot_button", form: "add_new_poll") %>
       <% end %>
       <div style="overflow-y: auto; height: 400px">
       <table>
