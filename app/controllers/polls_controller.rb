@@ -6,7 +6,7 @@ class PollsController < ApplicationController
   end
 
   def index
-    if session[:admin_id].nil?
+    if params[:commit] == 'Login'
       val = authenticate(params[:username], params[:password])
       if ['invalid username', 'invalid password/username'].include?(val)
         redirect_to '/'
