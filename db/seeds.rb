@@ -7,6 +7,10 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+Invitee.create(email: 'bob@gmail.com', votes_left: 2, poll_id: 1)
+Invitee.create(email: 'tom@gmail.com', votes_left: 2, poll_id: 1)
+Invitee.create(email: 'phil@gmail.com', votes_left: 2, poll_id: 1)
+
 
 Admin.create(id: 1, username: 'SirOhmbre', password: '12345')
 Poll.create(id: 1, title: 'test_poll1', description: 'Huehnergarth is hard to spell',
