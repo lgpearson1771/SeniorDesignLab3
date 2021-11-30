@@ -10,7 +10,7 @@ class Poll < ActiveRecord::Base
   #validates :location, presence: true
 
   validates :votes_per_user, presence: true
-  validates :votes_per_user, numericality: { greater_than: 0, only_integer: true}
+  validates :votes_per_user, numericality: { greater_than: 0, only_integer: true }
   validates :votes_per_timeslot, presence: true
   validates :votes_per_timeslot, numericality: { greater_than: 0, only_integer: true }
   validates :timezone, presence: true
@@ -20,4 +20,13 @@ class Poll < ActiveRecord::Base
   def add_times
 
   end
+
+  def self.send_emails(poll_id)
+    invitees = Invitee.where({ poll_id: poll_id })
+    invitees.each do |invitee|
+      print "\nemail for invitee = #{invitee.email}\n"
+
+    end
+  end
+
 end
