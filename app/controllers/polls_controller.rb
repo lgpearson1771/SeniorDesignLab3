@@ -14,7 +14,7 @@ class PollsController < ApplicationController
       end
     end
     if params[:commit] == 'Publish'
-      print "This is where we will send emails to users associated to poll #{params[:publish]}\n"
+      Poll.send_emails(params[:publish])
     end
     if params[:commit] == 'Delete'
       poll = Poll.where(id: params[:delete])[0]
