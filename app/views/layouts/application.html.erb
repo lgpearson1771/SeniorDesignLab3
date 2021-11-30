@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<%if !params[:action].starts_with? ("login") %>
+<%if !params[:action].starts_with?("login") && session[:user_id].nil? %>
 <div class="topnav">
   <a class="active" href="/">Log Out</a>
   <a href="/polls">My Polls</a>
