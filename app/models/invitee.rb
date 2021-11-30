@@ -1,4 +1,4 @@
 class Invitee < ActiveRecord::Base
-  has_and_belongs_to_many :invitees
-  belongs_to :polls
+  has_and_belongs_to_many :blocks
+  belongs_to :poll
 end

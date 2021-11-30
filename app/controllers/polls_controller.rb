@@ -75,8 +75,8 @@ class PollsController < ApplicationController
   end
 
   def invitees
-    print(params)
-    redirect_to "/polls/#{@poll.id}/invite_to_poll"
+    @poll = Poll.find(params[:id])
+    render "/polls/invitees"
   end
 
 end

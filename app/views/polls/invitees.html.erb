@@ -1,8 +1,14 @@
+</br>
+</br>
 <h1> Invite People to poll</h1>
 
-<% @invitees.each do |invitee| %>
+<% @poll.invitees.each do |invitee| %>
   <%= "#{invitee.email}" %>
   </br>
 <% end %>
 
-<%= button_to "Back", { :action => "polls" }, :method => :get %>
+
+
+<%= button_to polls_path, :method => :get do%>
+  Back
+<% end %>
