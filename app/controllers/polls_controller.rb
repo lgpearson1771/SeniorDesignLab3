@@ -6,7 +6,7 @@ class PollsController < ApplicationController
   end
 
   def index
-    if session[:admin_id].nil?
+    if params[:commit] == 'Login'
       val = authenticate(params[:username], params[:password])
       if ['invalid username', 'invalid password/username'].include?(val)
         redirect_to '/'
@@ -14,7 +14,7 @@ class PollsController < ApplicationController
       end
     end
     if params[:commit] == 'Publish'
-      print "This is where we will send emails to users associated to poll #{params[:publish]}\n"
+      Poll.send_emails(params[:publish])
     end
     if params[:commit] == 'Delete'
       poll = Poll.where(id: params[:delete])[0]

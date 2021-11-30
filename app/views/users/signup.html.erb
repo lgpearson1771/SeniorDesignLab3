@@ -1,0 +1,21 @@
+<br>
+<br>
+<br>
+
+<H1>Confirm signup for <%=@poll.title%></H1>
+<H2><%=@poll.description%></H2>
+<H2><%=@poll.timezone%></H2>
+<H2><%=@poll.location%></H2>
+<br>
+<H3>Time:</H3>
+<H4><%=@timeslot.day%></H4>
+<H4><%=@block.start%> - <%=@block.end%></H4>
+
+<%= form_tag( "/signup_confirmation/#{@poll.id}", {method: :get}) do %>
+  <%= hidden_field_tag "block_id", params[:block_id] %>
+  <%= submit_tag("Confirm", id: :login) %>
+<% end %>
+
+<%= form_tag( :back, {method: :get}) do %>
+  <%= submit_tag("Cancel", id: :login) %>
+<% end %>
