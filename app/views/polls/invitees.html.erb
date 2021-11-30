@@ -6,7 +6,19 @@
   <%= "#{invitee.email}" %>
   </br>
 <% end %>
-
+<button id="add_invitee"> add </button>
+<section class="invitee_form" style="display: none;">
+  <%= form_tag( "/invitees", :method => :post, :id => 'add_invitee') do %>
+    <%= label(:email_label, "Email") %>
+    <%= text_field :invitee, :email %>
+  <% end %>
+  <button id="cancel_add"> cancel </button>
+</section>
+<script type="text/javascript">
+  $('#add_invitee').on('click',function(evt) {
+    $('.invitee_form').show();
+  });
+</script>
 
 
 <%= button_to polls_path, :method => :get do%>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/polls/:id/invitees' => 'polls#invitees'
 
   resources :timeslots
+  resources :invitees
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
