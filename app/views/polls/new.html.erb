@@ -1,6 +1,8 @@
 <%#= render :layout => "layouts/popup" , :locals => {:title => 'some title'} do%>
 <div id="new_poll_page_id">
   <% provide(:title, "Create Poll") %>
+  <br>
+  <br>
   <h1>Create Poll</h1>
   <div>
     <%= form_tag( "/polls", :method => :post, :id => 'add_new_poll') do %>
