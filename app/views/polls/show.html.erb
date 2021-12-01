@@ -1,1 +1,27 @@
-<h1>~Show page~</h1>
+</br>
+</br>
+<h1>Results</h1>
+
+<div style="overflow-y: auto; height: 400px">
+  <table>
+    <tr>
+      <th>Date</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Number of Blocks</th>
+    </tr>
+    <% @timeslots.each do |timeslot| %>
+      <tr>
+        <td><%= timeslot.day %></td>
+        <td><%= timeslot.start %></td>
+        <td><%= timeslot.end %></td>
+        <td><%= timeslot.blocks.length %></td>
+        <td><%= link_to '', timeslot, :method => :delete, :class => 'close'%> </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= button_to polls_path, :method => :get, id: 'back_button' do%>
+  Back
+<% end %>
