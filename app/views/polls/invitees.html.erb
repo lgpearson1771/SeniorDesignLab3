@@ -1,26 +1,52 @@
-</br>
-</br>
+<br>
+<br>
 <h1> Invite People to poll</h1>
+<br>
+<div style="overflow-y: auto; max-height: 400px;">
+  <table style="max-width: 350px;">
+    <tr>
+      <th>Email</th>
+    </tr>
+    <% @poll.invitees.each do |invitee| %>
+      <tr>
+        <td style="float: left"><%= "#{invitee.email}" %></td>
+        <td style="float: right; padding-right: 60px;"><%= link_to '', invitee, :method => :delete, :class => 'close'%></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
 
-<% @poll.invitees.each do |invitee| %>
-  <%= "#{invitee.email}" %>
-  <%= link_to '', invitee, :method => :delete, :class => 'close'%>
-  </br>
-<% end %>
-<button id="add_invitee"> add </button>
-<section class="invitee_form" style="display: none;">
-  <%= form_tag( "/invitees", :method => :post, :id => 'add_invitee') do %>
-    <%= label(:email_label, "Email") %>
-    <%= text_field :invitee, :email %>
-    <%= hidden_field_tag 'poll', @poll.id %>
-    <%= submit_tag "Add" %>
-  <% end %>
-  <button id="cancel_add"> cancel </button>
-</section>
+<div style="margin-top: 5px;">
+  <div class="inline">
+    <button id="add_invitee"> add </button>
+  </div>
 
-<%= button_to "polls/#{@poll.id}/edit?meetings=true", :method => :get, id: 'back_button' do%>
-  Back
-<% end %>
+  <div class="inline">
+    <%= button_to "polls/#{@poll.id}/edit?meetings=true", :method => :get, id: 'back_button' do%>
+      Back
+    <% end %>
+  </div>
+
+</div>
+
+<br>
+
+<div>
+  <section class="invitee_form" style="display: none;">
+    <%= form_tag( "/invitees", :method => :post, :id => 'add_invitee') do %>
+      <%= label(:email_label, "Email") %>
+      <div style="padding-bottom: 10px"><%= text_field :invitee, :email %></div>
+      <%= hidden_field_tag 'poll', @poll.id %>
+      <div style="float: left"><%= submit_tag "Add" %></div>
+
+
+    <% end %>
+
+      <div style="float: left"><button id="cancel_add"> cancel </button></div>
+
+
+  </section>
+</div>
 
 <script type="text/javascript">
   $('#add_invitee').on('click',function(evt) {
