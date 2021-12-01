@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :verify_user
+  before_action :verify_user, except: [:login, :check_login]
 
   def poll
     #   <div class="item1" style="grid-column: column-pos / span column-width; grid-row: row-pos / span row-length;">Content</div>
@@ -247,13 +247,19 @@ class UsersController < ApplicationController
     @poll = Poll.find_by_id(params[:id])
 
     unless @poll.invitees.where(email: params[:email]).length > 0
-      return redirect_to users_error_path
+      flash[:warning] = "Invalid email!"
+      return redirect_to "/users/login/#{@poll.id}"
     end
     @user = Invitee.where(email: params[:email])[0]
     session[:user_id] = @user.id
     # return redirect_to users_error_path
 
     redirect_to "/poll_signup/#{@poll.id}"
+  end
+
+  def logout
+    session[:user_id] = nil
+    redirect_to "/users/login/#{params[:id]}"
   end
 
   def add_poll
@@ -287,11 +293,11 @@ class UsersController < ApplicationController
   end
 
   def verify_user
+    session[:admin_id] = nil
     @poll = Poll.find_by_id(params[:id])
     @user = Invitee.find(session[:user_id])
-    unless @poll.invitees.find_by_id(@user.id)
+    unless params[:id].nil? || @poll.invitees.find_by_id(@user.id)
       return redirect_to users_error_path
-
     end
   end
 end

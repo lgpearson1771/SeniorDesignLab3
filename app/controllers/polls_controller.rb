@@ -29,9 +29,11 @@ class PollsController < ApplicationController
 
   def login
     # renders the admin login page no functionality needed
+    session[:user_id] = nil
   end
 
   def authenticate(username, password)
+    session[:user_id] = nil
     user_info = Admin.where({ username: username })[0]
     if user_info.nil? || user_info.blank?
       flash[:warning] = 'This username does not exist'
