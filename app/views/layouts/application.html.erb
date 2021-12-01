@@ -6,10 +6,19 @@
   <a href="/polls">My Polls</a>
   <a href="/polls/new">Create Poll</a>
   <a href="/poll_signup/1">TEST POLL</a>
+  <a class="title" href="" style="font-family: 'Mochiy Pop One', sans-serif; text-align: center">Doodle Hub</a>
 </div>
+<% elsif !params[:action].starts_with?("login")  %>
+  <div class="topnav">
+    <a class="active" href="/users/logout/<%=params[:id] %>">Log Out</a>
+    <a class="title" href="" style="font-family: 'Mochiy Pop One', sans-serif; text-align: center">Doodle Hub</a>
+  </div>
 <%end%>
 
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap" rel="stylesheet">
   <%if ! (params[:action].starts_with?("login") && params[:controller].starts_with?("polls") )%>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
   <%end%>
