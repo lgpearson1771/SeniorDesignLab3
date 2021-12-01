@@ -1,9 +1,8 @@
 <%#= render :layout => "layouts/popup" , :locals => {:title => 'some title'} do%>
-<br>
-<br>
 <div id="new_poll_page_id">
   <% provide(:title, "Create Poll") %>
-
+  <br>
+  <br>
   <h1>Create Poll</h1>
   <div>
     <%= form_tag( "/polls", :method => :post, :id => 'add_new_poll') do %>
@@ -14,7 +13,7 @@
       <%= text_field(:poll, :location, :placeholder => "e.g. SC 3258") %>
 
       <%= label_tag(:description_label, "Description") %>
-      <%= text_field(:poll, :description, :placeholder => "The poll description...") %>
+      <%= text_area(:poll, :description, :placeholder => "The poll description...", :style => "width: 200px; resize: none; height: 65px; text-align: left;" ) %>
 
       <%= label_tag(:user_votes_label, "Votes per User") %>
       <%= text_field(:poll, :user_votes) %>
@@ -23,6 +22,7 @@
       <%= text_field(:poll, :votes_per_timeslot) %>
 
       <%= label_tag(:timezone_label, "Timezone") %>
+      <br>
       <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
                                      ['Central (UTC-06:00)', "CDT"],
                                      ['Mountain (UTC-07:00)', "MDT"],

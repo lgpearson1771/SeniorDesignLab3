@@ -3,6 +3,14 @@
   flex-flow: row wrap;
   align-items: center;
 }
+select{
+  display: inline-block;
+  flex-flow: row wrap;
+  align-items: center;
+  margin-right: 0px;
+  margin-bottom: 25px;
+}
+
 .close {
   margin-left: 20px;
   position: relative;
@@ -26,3 +34,21 @@
 .close:after {
   transform: rotate(-45deg);
 }
+
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+input{
+  margin-bottom: 0px;
+}
+
+
