@@ -2,6 +2,31 @@
 <br>
 <br>
 
-<h1> Thanks, <%= @user.email %>! </h1>
-<h4>You have <%= @user.votes_left %> out of <%= @poll.votes_per_user %> votes remaining</h4>
+<h1 style="animation-duration: 3s; animation-name: slidein;"> Thanks, <%= @user.email %>! </h1>
+<% if @user.votes_left > 0 %>
+<h4 style="animation-duration: 1s; animation-name: slidein;" >You have <%= @user.votes_left %> out of <%= @poll.votes_per_user %> votes remaining</h4>
 <p>Would you like to <a href=<%="/poll_signup/#{@poll.id}" %>>Sign up</a> for another time slot?</p>
+<% else %>
+
+  <h4 style="animation-duration: 1s; animation-name: slidein;" >You are out of votes.</h4>
+  <p><a href=<%="/poll_signup/#{@poll.id}" %>>Click Here</a> to view or change your registered timeslots. </p>
+
+<% end %>
+
+<style>
+  p {
+    animation-duration: 2s;
+    animation-name: slidein;
+  }
+  @keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+  }
+</style>

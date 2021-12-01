@@ -29,6 +29,7 @@ class PollsController < ApplicationController
 
   def login
     # renders the admin login page no functionality needed
+    session[:user_id] = nil
   end
 
   def authenticate(username, password)

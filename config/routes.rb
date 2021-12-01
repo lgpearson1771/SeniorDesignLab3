@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/users/error' => 'users#error'
   post '/users/login/:id' => 'users#check_login'
   get '/cancel/:id' => 'users#cancel'
-
+  get '/users/logout/:id' => 'users#logout'
 
 
   post '/polls/:id/add_times' => 'polls#add_times'

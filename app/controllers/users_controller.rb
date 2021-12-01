@@ -257,6 +257,11 @@ class UsersController < ApplicationController
     redirect_to "/poll_signup/#{@poll.id}"
   end
 
+  def logout
+    session[:user_id] = nil
+    redirect_to "/users/login/#{params[:id]}"
+  end
+
   def add_poll
     @id = params[:id]
     # add block registration to database with block id and userid(@id)
