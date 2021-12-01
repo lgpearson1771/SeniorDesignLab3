@@ -31,13 +31,13 @@ class Poll < ActiveRecord::Base
                     address: 'smtp.gmail.com',
                     port: '587',
                     enable_starttls_auto: true,
-                    # user_name: 'TheOhmbresSDL3@gmail.com',
-                    # password: 'PASSWORD_GOES_HERE',
+                    user_name: 'TheOhmbresSDL3@gmail.com',
+                    password: 'PASSWORD_GOES_HERE',
                     authentication: :login,
                     domain: 'localhost.localdomain'
                   },
                   subject: 'sending email test',
-                  body: 'did this work?'
+                  body: 'did this work? :))'
                 })
     end
   end
