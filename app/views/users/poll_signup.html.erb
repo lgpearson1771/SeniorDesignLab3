@@ -1,7 +1,6 @@
 <br>
 <H1><%=@poll_name%></H1>
-<a href="/users/logout/<%=@poll.id%>">Logout</a>
-<h3>signup for <%= @user.email %></h3>
+<h3>Logged in as <%= @user.email %></h3>
 <h4><%= @user.votes_left %> out of <%= @poll.votes_per_user %> votes remaining</h4>
 
 
@@ -32,7 +31,7 @@
           <div class = "item <%="hover" unless time[:id].nil? %>" style='box-sizing: border-box;<%="background-color: red;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" if time[:booked] %><%="background-color: #8eedbb;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #e0e0e0;" if time[:id].nil? && time[:row].even? && ! time[:booked] %><%="background: white;" if time[:id].nil? && time[:row].odd? && ! time[:booked] %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
         <% elsif time[:reserved]%>
           <% url = "'/users/show/#{@poll.id}/?block_id=#{time[:id]}'" %>
-          <div onclick="window.location.href = <%= url %> " class = "item <%="hover" unless time[:id].nil? %>" style='box-sizing: border-box; background-color: blue;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px; grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
+          <div onclick="window.location.href = <%= url %> " class = "item <%="hover2" unless time[:id].nil? %>" style='box-sizing: border-box; background-color: blue;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px; grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
             Votes <%=  Block.find_by_id(time[:id]).invitees.length %> / <%=  @poll.votes_per_timeslot %>
         <% else %>
           <div onclick="window.location.href = <%= url %> " class = "item <%="hover" unless time[:id].nil? %>" style='box-sizing: border-box;<%="background-color: red;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" if time[:booked] %><%="background-color: #8eedbb;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #e0e0e0;" if time[:id].nil? && time[:row].even? && ! time[:booked] %><%="background: white;" if time[:id].nil? && time[:row].odd? && ! time[:booked] %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>

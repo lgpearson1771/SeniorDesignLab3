@@ -78,3 +78,32 @@ body {
  max-width: 75vw;
 }
 
+
+.hover2{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.hover2:after {
+  content: 'Display »';
+  font-size: 1vw;
+  position: absolute;
+  opacity: 0;
+  bottom:0;
+  right:0;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+.hover2:hover{
+  padding-right: 24px;
+  padding-left:8px;
+}
+
+.hover2:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+
