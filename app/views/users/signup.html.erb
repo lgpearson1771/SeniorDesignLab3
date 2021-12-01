@@ -1,21 +1,41 @@
 <br>
 <br>
-<br>
 
 <H1>Confirm signup for <%=@poll.title%></H1>
-<H2><%=@poll.description%></H2>
-<H2><%=@poll.timezone%></H2>
-<H2><%=@poll.location%></H2>
+
+<h4 style="margin-bottom: 4px;"> Location </h4>
+<div style="margin-top: 0px; margin-bottom: 0px;"> <%= @poll.location %> </div>
+
+<h4 style="margin-bottom: 4px;"> Description </h4>
+<div style="margin-top: 0px; margin-bottom: 0px;"> <%= @poll.description %> </div>
 <br>
-<H3>Time:</H3>
-<H4><%=@timeslot.day%></H4>
-<H4><%=@block.start%> - <%=@block.end%></H4>
+<div class="infoBox">
+  <H1>Reserved Time:</H1>
 
-<%= form_tag( "/signup_confirmation/#{@poll.id}", {method: :get}) do %>
-  <%= hidden_field_tag "block_id", params[:block_id] %>
-  <%= submit_tag("Confirm", id: :login) %>
-<% end %>
+  <h4 style="margin-bottom: 4px;"> Date </h4>
+  <div style="margin-top: 0px; margin-bottom: 0px;"> <%=@timeslot.day%> </div>
 
-<%= form_tag( :back, {method: :get}) do %>
-  <%= submit_tag("Cancel", id: :login) %>
-<% end %>
+  <h4 style="margin-bottom: 4px;"> Timezone </h4>
+  <div style="margin-top: 0px; margin-bottom: 0px;"> <%=@poll.timezone%> </div>
+
+  <h4 style="margin-bottom: 4px;"> Time </h4>
+  <div style="margin-top: 0px; margin-bottom: 0px;"> <%=@block.start%> - <%=@block.end%> </div>
+</div>
+
+<br>
+
+<div>
+  <div class="inline">
+    <%= form_tag( "/signup_confirmation/#{@poll.id}", {method: :get}) do %>
+      <%= hidden_field_tag "block_id", params[:block_id] %>
+      <%= submit_tag("Confirm", id: :login) %>
+    <% end %>
+  </div>
+
+  <div class="inline">
+    <%= form_tag( :back, {method: :get}) do %>
+      <%= submit_tag("Cancel", id: :login) %>
+    <% end %>
+  </div>
+</div>
+
