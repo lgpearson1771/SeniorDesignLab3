@@ -12,10 +12,12 @@ class InviteesController < ApplicationController
   end
 
   def destroy
-    @invitee = Invitee.find(params[:id])
-    poll = @invitee.poll
-    @invitee.destroy
-    #todo un-connect connected blocks as well
+    invitee = Invitee.find(params[:id])
+    poll = invitee.poll
+    invitee.blocks.each do |block|
+      invitee.delete(block)
+    end
+
     redirect_to "/polls/#{poll.id}/invitees"
   end
 end
