@@ -35,7 +35,7 @@ gem 'turbolinks'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'themoviedb'
+gem 'pony', '~> 1.11'
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
