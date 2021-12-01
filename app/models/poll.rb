@@ -22,6 +22,7 @@ class Poll < ActiveRecord::Base
   end
 
   def self.send_emails(poll_id)
+    poll = Poll.find(poll_id)
     invitees = Invitee.where({ poll_id: poll_id })
     invitees.each do |invitee|
       Pony.mail({
@@ -36,8 +37,9 @@ class Poll < ActiveRecord::Base
                     authentication: :login,
                     domain: 'localhost.localdomain'
                   },
-                  subject: 'sending email test',
-                  body: 'did this work? :))'
+                  subject: "Invitation to signup for #{poll.title}",
+                  body: "You have been invited to sign-up for a timeslot(s).
+                         Sign-up here: 'http://localhost:3000/users/login/#{poll_id}'"
                 })
     end
   end
