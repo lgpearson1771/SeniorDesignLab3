@@ -36,7 +36,7 @@
         <% if time[:id].nil? %>
 
 
-          <div class = "item <%="hover" unless time[:id].nil? %>" style='box-sizing: border-box;<%="background-color: red;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" if time[:booked] %><%="background-color: #8eedbb;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #e0e0e0;" if time[:id].nil? && time[:row].even? && ! time[:booked] %><%="background: white;" if time[:id].nil? && time[:row].odd? && ! time[:booked] %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
+          <div class = "item <%="hover" unless time[:id].nil? %>" style='box-sizing: border-box;<%="background-color: #ffb8b8;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" if time[:booked] %><%="background-color: #8eedbb;box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);border-radius: 2px;" unless time[:id].nil? %><%="background: #e0e0e0;" if time[:id].nil? && time[:row].even? && ! time[:booked] %><%="background: white;" if time[:id].nil? && time[:row].odd? && ! time[:booked] %>grid-column: <%= time[:column] %> / span 1; grid-row:<%= time[:row] %> / span <%= time[:duration] %>;'>
           <% if time[:booked] %>
             FULL
             <% end %>
