@@ -64,7 +64,8 @@ class PollsController < ApplicationController
                         location: poll_info['location'],
                         votes_per_user: poll_info['user_votes'],
                         votes_per_timeslot: poll_info['votes_per_timeslot'],
-                        timezone: poll_info['timezone']
+                        timezone: poll_info['timezone'],
+                        admin_id: session[:admin_id]
                        })
 
     unless poll.valid?
@@ -138,7 +139,7 @@ class PollsController < ApplicationController
   def publish
     poll = Poll.find(params[:id])
     if poll.timeslots.length == 0
-      render :json => {has_timeslots: false}
+      return render :json => {has_timeslots: false}
     end
     poll.published = params[:publish] == 'true'
     poll.save
