@@ -74,7 +74,7 @@ class PollsController < ApplicationController
                         votes_per_user: poll_info['user_votes'],
                         votes_per_timeslot: poll_info['votes_per_timeslot'],
                         timezone: poll_info['timezone'],
-                        admin_id: session[:admin_id]
+                        admin_id: session[:admin_id],
                         deadline: deadline # poll_info['deadline']
                        })
 
