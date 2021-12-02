@@ -1,6 +1,5 @@
 <br>
 <H1 style="margin-top: 10px;text-align: center; font-size:3.5em"><%=@poll_name%></H1>
-
 <div class="row">
   <div class="column">
     <h3>Logged in as <%= @user.email %></h3>
@@ -15,9 +14,9 @@
 <div class="grid-container">
   <% row = 1 %>
   <div><%= @poll.timezone %></div>
-  <% (@min_time..(@max_time-15)).step(15) do |time| %>
+  <% (@min_time..(@max_time-Invitee.time_interval)).step(Invitee.time_interval) do |time| %>
     <div class = "item" style='border-right: solid; border-right-color: rgb(255,255,255); grid-column: 1 / span 1; grid-row:<% row +1%> / span 1;'>
-      <%=  UsersController.print_time(time) %> - <%=  UsersController.print_time(time+15) %>
+      <%=  UsersController.print_time(time) %> - <%=  UsersController.print_time(time+Invitee.time_interval) %>
       <% row = row + 1 %>
     </div>
   <% end %>
