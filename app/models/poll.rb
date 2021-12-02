@@ -33,7 +33,7 @@ class Poll < ActiveRecord::Base
                     port: '587',
                     enable_starttls_auto: true,
                     user_name: 'TheOhmbresSDL3@gmail.com',
-                    password: 'PASSWORD_GOES_HERE',
+                    password: ENV['email_password'],
                     authentication: :login,
                     domain: 'localhost.localdomain'
                   },
@@ -55,7 +55,7 @@ class Poll < ActiveRecord::Base
                     port: '587',
                     enable_starttls_auto: true,
                     user_name: 'TheOhmbresSDL3@gmail.com',
-                    password: 'PASSWORD_GOES_HERE',
+                    password: ENV['email_password'],
                     authentication: :login,
                     domain: 'localhost.localdomain'
                   },
