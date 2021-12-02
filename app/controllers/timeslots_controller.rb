@@ -51,6 +51,11 @@ class TimeslotsController < ApplicationController
       return
     end
 
+    if interval == 0
+      flash[:warning] = 'Timeslot must have time between start and end'
+      return redirect_to "/polls/#{params[:poll_id]}/edit?meetings=true"
+    end
+
     day = Date.strptime(params[:date], '%Y-%m-%d')
     timeslot = Timeslot.create(day: day, end: timeslot_end_time, start: timeslot_start_time, poll_id: params[:poll_id])
 
