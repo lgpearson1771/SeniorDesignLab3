@@ -93,6 +93,7 @@ class PollsController < ApplicationController
   end
 
   def show
+    @show_all = (params[:show_all] == 'false' or params[:show_all].nil?)
     @poll = Poll.find(params[:id])
     @block_data = []
     @poll.timeslots.each do |timeslot|
@@ -100,7 +101,7 @@ class PollsController < ApplicationController
         block.invitees.each do |invitee|
           @block_data.append({time: "#{block.timeslot.day.strftime("%m/%d/%Y")} #{block.start} - #{block.end}", invitee: invitee.email})
         end
-        if block.invitees.length == 0
+        if block.invitees.length == 0 and @show_all
           @block_data.append({time: "#{block.timeslot.day.strftime("%m/%d/%Y")} #{block.start} - #{block.end}", invitee: ''})
         end
       end
