@@ -46,7 +46,7 @@ class TimeslotsController < ApplicationController
     end
 
     if interval % 5 != 0
-      flash[:warning] = 'no' #todo fix
+      flash[:warning] = 'block sizes must be in five minute intervals'
       redirect_to "/polls/#{params[:poll_id]}/edit?meetings=true"
       return
     end
