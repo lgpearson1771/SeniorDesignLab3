@@ -137,6 +137,9 @@ class PollsController < ApplicationController
 
   def publish
     poll = Poll.find(params[:id])
+    if poll.timeslots.length == 0
+      render :json => {has_timeslots: false}
+    end
     poll.published = params[:publish] == 'true'
     poll.save
     begin
@@ -146,6 +149,6 @@ class PollsController < ApplicationController
     rescue ArgumentError => e
       # Ignored
     end
-    render :json => ''
+    render :json => {has_timeslots: true}
   end
 end
