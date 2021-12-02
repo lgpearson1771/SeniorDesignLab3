@@ -6,7 +6,7 @@
   <h1>Create Poll</h1>
   <div>
     <%= form_tag( "/polls", :method => :post, :id => 'add_new_poll') do %>
-      <%= label(:title_label, "Title") %>
+      <%= label(:title_label, "Title", required: true) %>
       <%= text_field(:poll, :title, :placeholder => "Enter poll name here") %>
 
       <%= label_tag(:location_label, "Location") %>
@@ -16,12 +16,12 @@
       <%= text_area(:poll, :description, :placeholder => "The poll description...", :style => "width: 200px; resize: none; height: 65px; text-align: left;" ) %>
 
       <%= label_tag(:user_votes_label, "Votes per User") %>
-      <%= text_field(:poll, :user_votes) %>
+      <%= text_field(:poll, :user_votes, required: true, value: 1) %>
 
       <%= label_tag(:votes_per_timeslot_label, "Votes per Timeslot") %>
-      <%= text_field(:poll, :votes_per_timeslot) %>
+      <%= text_field(:poll, :votes_per_timeslot, required: true, value: 1) %>
 
-      <%= label_tag(:timezone_label, "Timezone") %>
+      <%= label_tag(:timezone_label, "Timezone", required: true) %>
       <br>
       <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
                                      ['Central (UTC-06:00)', "CDT"],

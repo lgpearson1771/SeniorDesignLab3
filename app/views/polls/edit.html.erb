@@ -10,7 +10,7 @@
     <div>
       <%= form_tag( "/polls/#{:id}?poll_id=#{@poll.id}", :method => :put, :id => 'add_new_poll') do %>
         <%= label(:title_label, "Title") %>
-        <%= text_field(:poll, :title, :placeholder => "enter your poll name here") %>
+        <%= text_field(:poll, :title, :placeholder => "enter your poll name here", required: true) %>
 
         <%= label_tag(:location_label, "Location") %>
         <%= text_field(:poll, :location, :placeholder => "location") %>
@@ -19,10 +19,10 @@
         <%= text_area(:poll, :description, :placeholder => "The poll description...", :style => "width: 200px; resize: none; height: 65px" ) %>
 
         <%= label_tag(:user_votes_label, "Votes per User") %>
-        <%= text_field(:poll, :votes_per_user) %>
+        <%= text_field(:poll, :votes_per_user, required: true) %>
 
         <%= label_tag(:votes_per_timeslot_label, "Votes per Timeslot") %>
-        <%= text_field(:poll, :votes_per_timeslot) %>
+        <%= text_field(:poll, :votes_per_timeslot, required: true) %>
 
         <%= label_tag(:timezone_label, "Timezone") %>
         <br>
@@ -31,7 +31,7 @@
                                        ['Mountain (UTC-07:00)', "MDT"],
                                        ['Pacific (UTC-08:00)', "PDT"],
                                        ['Alaskan (UTC-09:00)', "ADT"],
-                                       ['Hawaiian (UTC-10:00)', "HST"]]) %>
+                                       ['Hawaiian (UTC-10:00)', "HST"]], required: true) %>
         <br>
         <br>
         <div class="inline">
