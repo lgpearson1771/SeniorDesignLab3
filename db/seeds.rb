@@ -41,5 +41,7 @@ Block.create(timeslot_id: 4, start: '06:45', end:'07:30')
 
 Block.create(timeslot_id: 5, start: '12:00', end:'14:00')
 
-Invitee.create(email: 'tessa-schmidts@uiowa.edu', votes_left: 4, poll_id: 1)
-Invitee.create(email: 'nick-gorman@uiowa.edu', votes_left: 4, poll_id: 1)
+Invitee.create(email: 'lgpearson@uiowa.edu', votes_left: 4, poll_id: 1)
+
+# Invitee.create(email: 'tessa-schmidts@uiowa.edu', votes_left: 4, poll_id: 1)
+# Invitee.create(email: 'nick-gorman@uiowa.edu', votes_left: 4, poll_id: 1)
