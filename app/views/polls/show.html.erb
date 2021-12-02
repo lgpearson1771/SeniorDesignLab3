@@ -28,9 +28,8 @@
       </div>
 
       <div class="inline">
-        <%= button_to "/polls/#{@poll.id}/remind", :method => :post, id: 'remind_button' do%>
-          Remind
-        <% end %>
+
+        <button id = 'remindButton'>Remind</button>
       </div>
 
       <div class="inline">
@@ -83,6 +82,17 @@
 
 
 <script type="text/javascript">
+  $('#remindButton').click(function(evt) {
+    try {
+      $.post("/polls/" + <%=@poll.id.to_s %> +'/remind', {id: <%=@poll.id%>},
+        function (returnedData) {
+          canPublish = returnedData['has_timeslots'];
+        });
+    }
+    catch(e) {
+      alert(e);
+    }
+  });
   $('#publish').click(function(evt) {
     const publish = this.textContent === "Publish Poll";
     var canPublish;
