@@ -6,7 +6,7 @@
 
 <div class="grid-container">
   <% row = 1 %>
-  <div>Timezone: <%= @poll.timezone %></div>
+  <div><%= @poll.timezone %></div>
   <% (@min_time..(@max_time-15)).step(15) do |time| %>
     <div class = "item" style='border-right: solid; border-right-color: rgb(255,255,255); grid-column: 1 / span 1; grid-row:<% row +1%> / span 1;'>
       <%=  UsersController.print_time(time) %> - <%=  UsersController.print_time(time+15) %>
