@@ -110,4 +110,18 @@ class PollsController < ApplicationController
       @invitee_info.append({votes_left: "#{invitee.votes_left}/#{invitee.poll.votes_per_user}", email: invitee.email, id: invitee.id})
     end
   end
+
+  def remind
+    remind_list = []
+    Poll.find(params[:id]).invitees.each do |invitee|
+      if invitee.votes_left > 0
+        remind_list.append(invitee)
+      end
+    end
+    if remind_list.length > 0
+      Poll.remind_partial(remind_list)
+    end
+
+    redirect_to :back
+  end
 end

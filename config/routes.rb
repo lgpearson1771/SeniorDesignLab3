@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :timeslots
   resources :invitees
+
+  post '/polls/:id/remind' => 'polls#remind'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

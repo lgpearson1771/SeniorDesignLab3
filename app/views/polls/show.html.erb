@@ -41,6 +41,6 @@
   Invite
 <% end %>
 
-<%= button_to "", :method => :get, id: 'remind_button' do%>
+<%= button_to "/polls/#{@poll.id}/remind", :method => :post, id: 'remind_button' do%>
   Remind
 <% end %>

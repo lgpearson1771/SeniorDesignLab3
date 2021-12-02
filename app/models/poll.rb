@@ -42,4 +42,24 @@ class Poll < ActiveRecord::Base
     end
   end
 
+  def self.remind_partial(invitees)
+    poll = invitees[0].poll
+    invitees.each do |invitee|
+      Pony.mail({
+                  to: invitee.email,
+                  via: :smtp,
+                  via_options: {
+                    address: 'smtp.gmail.com',
+                    port: '587',
+                    enable_starttls_auto: true,
+                    user_name: 'TheOhmbresSDL3@gmail.com',
+                    password: 'PASSWORD_GOES_HERE',
+                    authentication: :login,
+                    domain: 'localhost.localdomain'
+                  },
+                  subject: "Reminder to vote in poll #{poll.title}",
+                  body: "You have #{invitee.votes_left} votes out of #{poll.votes_per_user} left in the poll!"
+      })
+    end
+  end
 end
