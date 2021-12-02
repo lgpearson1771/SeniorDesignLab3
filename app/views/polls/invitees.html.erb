@@ -23,7 +23,11 @@
 
   <div class="inline">
     <%= button_to "polls/#{@poll.id}/edit?meetings=true", :method => :get, id: 'back_button' do%>
-      Back
+      Edit Poll
+    <% end %>
+
+    <%= button_to poll_path, :method => :get, id: 'results_button' do%>
+      Results
     <% end %>
   </div>
 
