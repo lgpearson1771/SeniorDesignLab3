@@ -44,3 +44,11 @@
 <%= button_to "/polls/#{@poll.id}/remind", :method => :post, id: 'remind_button' do%>
   Remind
 <% end %>
+
+<%= button_to poll_path, method: :get, params: { show_all: @show_all}, id:'remind_button' do%>
+  <% if @show_all  %>
+    Show Only Reserved
+  <% else %>
+    Show All
+  <% end %>
+<% end %>
