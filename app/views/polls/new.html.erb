@@ -23,13 +23,19 @@
 
       <%= label_tag(:timezone_label, "Timezone", required: true) %>
       <br>
-      <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
-                                     ['Central (UTC-06:00)', "CDT"],
-                                     ['Mountain (UTC-07:00)', "MDT"],
-                                     ['Pacific (UTC-08:00)', "PDT"],
-                                     ['Alaskan (UTC-09:00)', "ADT"],
-                                     ['Hawaiian (UTC-10:00)', "HST"]], { include_blank: true }, required: true) %>
+      <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EST"],
+                                     ['Central (UTC-06:00)', "CST"],
+                                     ['Mountain (UTC-07:00)', "MST"],
+                                     ['Pacific (UTC-08:00)', "PST"]], { include_blank: true }) %>
       <br>
+
+      <%= label_tag(:votes_per_timeslot_label, "Deadline (optional)") %>
+      <%= check_box :poll, :deadline_enable, :checked => "unchecked", :onclick => "$('#deadline_display').toggle()" %>
+      <div id="deadline_display" style="display: none">
+        <%= datetime_select(:poll, :deadline, id: :deadline, ) %>
+      </div>
+
+
       <br>
       <%= submit_tag("Create!",  name: "create_poll_button", id: "create_poll_button") %>
     <% end %>

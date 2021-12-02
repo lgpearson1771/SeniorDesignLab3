@@ -2,7 +2,7 @@ class PollsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def poll_params
-    params.require(:poll).permit(:title, :description, :location, :votes_per_user, :votes_per_timeslot, :timezone)
+    params.require(:poll).permit(:title, :description, :location, :votes_per_user, :votes_per_timeslot, :timezone, :deadline)
   end
 
   def index
@@ -59,6 +59,15 @@ class PollsController < ApplicationController
 
   def create
     poll_info = params[:poll]
+    if poll_info["deadline_enable"] == "1"
+      deadline = DateTime.new(poll_info['deadline(1i)'].to_i,
+                              poll_info['deadline(2i)'].to_i,
+                              poll_info['deadline(3i)'].to_i,
+                              poll_info['deadline(4i)'].to_i,
+                              poll_info['deadline(5i)'].to_i,
+                              poll_info['deadline(6i)'].to_i)
+    end
+
     poll = Poll.create({title: poll_info['title'],
                         description: poll_info['description'],
                         location: poll_info['location'],
@@ -66,6 +75,7 @@ class PollsController < ApplicationController
                         votes_per_timeslot: poll_info['votes_per_timeslot'],
                         timezone: poll_info['timezone'],
                         admin_id: session[:admin_id]
+                        deadline: deadline # poll_info['deadline']
                        })
 
     unless poll.valid?
@@ -85,7 +95,26 @@ class PollsController < ApplicationController
   end
 
   def update
-    @poll = Poll.update(params[:poll_id], poll_params)
+    poll_info = params[:poll]
+
+    if poll_info["deadline_enable"] == "1"
+      deadline = DateTime.new(poll_info['deadline(1i)'].to_i,
+                              poll_info['deadline(2i)'].to_i,
+                              poll_info['deadline(3i)'].to_i,
+                              poll_info['deadline(4i)'].to_i,
+                              poll_info['deadline(5i)'].to_i,
+                              poll_info['deadline(6i)'].to_i)
+    end
+
+
+    @poll = Poll.update(params[:poll_id], {title: poll_info['title'],
+                                           description: poll_info['description'],
+                                           location: poll_info['location'],
+                                           votes_per_user: poll_info['votes_per_user'],
+                                           votes_per_timeslot: poll_info['votes_per_timeslot'],
+                                           timezone: poll_info['timezone'],
+                                           deadline: deadline # poll_info['deadline']
+    })
 
     unless @poll.valid?
       flash[:warning] = ''

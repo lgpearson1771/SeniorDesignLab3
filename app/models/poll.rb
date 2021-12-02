@@ -13,7 +13,7 @@ class Poll < ActiveRecord::Base
   validates :votes_per_timeslot, presence: true
   validates :votes_per_timeslot, numericality: { greater_than: 0, only_integer: true }
   validates :timezone, presence: true
-  validates :timezone, inclusion: { in: %w(EDT CDT MDT PDT ADT HST),
+  validates :timezone, inclusion: { in: %w(EST CST MST PST),
                                     message: '%{value} is not a valid timezone' }
 
   def add_times
