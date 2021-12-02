@@ -64,18 +64,25 @@
 <script type="text/javascript">
   $('#publish').click(function(evt) {
     const publish = this.textContent === "Publish Poll";
+    var canPublish;
     try {
       $.post(<%=@poll.id.to_s %> +'/publish', {publish: publish},
-        function (returnedData) {});
+        function (returnedData) {
+          canPublish = returnedData['has_timeslots'];
+        });
     }
     catch(e) {
       alert(e);
     }
-    if(publish){
-      this.textContent = "Close Poll";
+    if(canPublish) {
+      if (publish) {
+        this.textContent = "Close Poll";
+      } else {
+        this.textContent = "Publish Poll";
+      }
     }
-    else{
-      this.textContent = "Publish Poll";
+    else {
+      alert('a poll must have at least 1 timeslot before publishing');
     }
   });
 </script>

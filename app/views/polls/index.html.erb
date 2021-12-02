@@ -42,7 +42,7 @@
         <% else %>
           Publish
         <% end %>
-        </button></td>
+      </button></td>
 
       <td><%= form_tag( {controller: polls_path, action: :index}, { method: :get }) do %>
           <%= submit_tag("Delete", id: "delete_poll[#{poll.id}]".to_sym,
@@ -69,18 +69,26 @@
     }
     const publish = this.textContent === "Publish";
     const id = this.id.split('_')[2];
+    var canPublish;
     try {
       $.post('polls/' + id +'/publish', {publish: publish},
-        function (returnedData) {});
+        function (returnedData) {
+          canPublish = returnedData['has_timeslots'];
+        });
     }
     catch(e) {
       alert(e);
     }
-    if(publish){
-      this.textContent = "Close";
+    if(canPublish){
+      if(publish){
+        this.textContent = "Close";
+      }
+      else{
+        this.textContent = "Publish";
+      }
     }
-    else{
-      this.textContent = "Publish";
+    else {
+      alert('a poll must have at least 1 timeslot before publishing');
     }
   });
 </script>
