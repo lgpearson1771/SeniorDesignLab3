@@ -27,12 +27,10 @@
         <%= label_tag(:timezone_label, "Timezone") %>
 
         <br>
-        <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
-                                       ['Central (UTC-06:00)', "CDT"],
-                                       ['Mountain (UTC-07:00)', "MDT"],
-                                       ['Pacific (UTC-08:00)', "PDT"],
-                                       ['Alaskan (UTC-09:00)', "ADT"],
-                                       ['Hawaiian (UTC-10:00)', "HST"]], required: true) %>
+        <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EST"],
+                                       ['Central (UTC-06:00)', "CST"],
+                                       ['Mountain (UTC-07:00)', "MST"],
+                                       ['Pacific (UTC-08:00)', "PST"]]) %>
         <br>
 
         <%= label_tag(:votes_per_timeslot_label, "Deadline (optional)") %>
