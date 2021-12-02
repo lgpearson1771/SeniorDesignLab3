@@ -6,8 +6,8 @@
   <h1>Create Poll</h1>
   <div>
     <%= form_tag( "/polls", :method => :post, :id => 'add_new_poll') do %>
-      <%= label(:title_label, "Title", required: true) %>
-      <%= text_field(:poll, :title, :placeholder => "Enter poll name here") %>
+      <%= label(:title_label, "Title") %>
+      <%= text_field(:poll, :title, :placeholder => "Enter poll name here", required: true) %>
 
       <%= label_tag(:location_label, "Location") %>
       <%= text_field(:poll, :location, :placeholder => "e.g. SC 3258") %>
@@ -28,7 +28,7 @@
                                      ['Mountain (UTC-07:00)', "MDT"],
                                      ['Pacific (UTC-08:00)', "PDT"],
                                      ['Alaskan (UTC-09:00)', "ADT"],
-                                     ['Hawaiian (UTC-10:00)', "HST"]], { include_blank: true }) %>
+                                     ['Hawaiian (UTC-10:00)', "HST"]], { include_blank: true }, required: true) %>
       <br>
       <br>
       <%= submit_tag("Create!",  name: "create_poll_button", id: "create_poll_button") %>

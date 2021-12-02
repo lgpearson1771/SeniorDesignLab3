@@ -70,8 +70,9 @@ class PollsController < ApplicationController
     unless poll.valid?
       flash[:warning] = ''
       poll.errors.keys.each do |key|
-        flash[:warning] = flash[:warning] + "#{key} #{ poll.errors[key].first}; "
+        flash[:warning] = flash[:warning] + "#{key} #{ poll.errors[key].first}, "
       end
+      flash[:warning] = flash[:warning][0...-2]
       return redirect_to '/polls/new'
     end
     redirect_to "/polls/#{poll.id}/edit?meetings=true"
