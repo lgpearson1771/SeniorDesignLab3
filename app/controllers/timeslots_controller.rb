@@ -6,23 +6,28 @@ class TimeslotsController < ApplicationController
     start_hour = params['start']['start_time(4i)'].to_i
     end_hour = params['end']['end_time(4i)'].to_i
 
+    start_mins_string = params['start']['start_time(5i)']
+    end_mins_string = params['end']['end_time(5i)']
+    start_mins_string = "0" + start_mins_string if start_mins_string.length == 1
+    end_mins_string = "0" + start_mins_string if start_mins_string.length == 1
+
     if params["AM_PM_start"]['select'] == "PM"
-      timeslot_start_time = (start_hour + 12).to_s + ":" + start_minute.to_s
+      timeslot_start_time = (start_hour + 12).to_s + ":" + start_mins_string
       start = start_hour.to_i + 12
     else
-      timeslot_start_time = params['start']['start_time(4i)'] + ":" + params['start']['start_time(5i)']
+      timeslot_start_time = params['start']['start_time(4i)'] + ":" + start_mins_string
       start = start_hour
       if start_hour == 12
         start = start - 12
-        timeslot_start_time = (params['start']['start_time(4i)'].to_i - 12).to_s + ":" + start_minute.to_s
+        timeslot_start_time = (params['start']['start_time(4i)'].to_i - 12).to_s + ":" + start_mins_string
       end
     end
 
     if params["AM_PM_end"]['select'] == "PM"
-      timeslot_end_time = (end_hour + 12).to_s + ":" + params['end']['end_time(5i)']
+      timeslot_end_time = (end_hour + 12).to_s + ":" + end_mins_string
       end_time =  end_hour + 12
     else
-      timeslot_end_time = params['end']['end_time(4i)'] + ":" + params['end']['end_time(5i)']
+      timeslot_end_time = params['end']['end_time(4i)'] + ":" + end_mins_string
       end_time =  end_hour
     end
 
@@ -56,8 +61,8 @@ class TimeslotsController < ApplicationController
       end_second = ((number + interval) + start_minute) % 60
       start_first = start_first - 12 if start_first > 12
       end_first = end_first - 12 if end_first > 12
-      start_second = start_second.to_s + "0" if start_second.to_s.length == 1
-      end_second = end_second.to_s + "0" if end_second.to_s.length == 1
+      start_second = "0" + start_second.to_s if start_second.to_s.length == 1
+      end_second = "0" + end_second.to_s if end_second.to_s.length == 1
 
       Block.create(start: "#{start_first}:#{start_second}", end: "#{end_first}:#{end_second}", timeslot_id: timeslot.id)
     end
