@@ -1,15 +1,15 @@
 .infoBox{
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(98, 98, 98, 0.23) 0px 3px 6px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px;
   width: 525px;
   padding-left: 10px;
   padding-bottom: 10px;
   margin-bottom:20px;
   margin-top:20px;
+  border-radius: 5px;
 }
 
 table
 {
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(98, 98, 98, 0.23) 0px 3px 6px;
   border-radius: 10px;
   min-height: 200px;
 
@@ -18,6 +18,7 @@ table
 .tableFormat {
   border-collapse: collapse;
   width: 100%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px;
 }
 
 .tableFormat td, th {
@@ -26,7 +27,9 @@ table
 
 .tableFormat tr:nth-child(even){background-color: #f2f2f2;}
 
-.tableFormat tr:hover {background-color: #ddd;}
+.tableFormat tr:hover {
+  background-color: #ddd;
+}
 
 .tableFormat th {
   padding-top: 12px;
@@ -38,4 +41,13 @@ table
 
 body{
   max-width: 1200px;
+}
+tbody tr:nth-child(even) button {
+  background-color: #d0cfcf;
+
+}
+
+tbody tr:nth-child(even) button:hover {
+  background-color: #9f9f9f;
+
 }

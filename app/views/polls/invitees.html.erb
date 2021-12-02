@@ -2,7 +2,7 @@
 <br>
 <h1> Invite People to poll</h1>
 <br>
-<div style="overflow-y: auto; max-height: 400px;">
+<div style="overflow-y: auto; max-height: 400px; max-width: 350px; box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px; border-radius: 10px;">
   <table style="max-width: 350px;">
     <tr>
       <th>Email</th>
@@ -16,16 +16,18 @@
   </table>
 </div>
 
-<div style="margin-top: 5px;">
+<div style="margin-top: 20px;">
   <div class="inline">
-    <button id="add_invitee"> add </button>
+    <button id="add_invitee"> Add </button>
   </div>
 
   <div class="inline">
     <%= button_to "polls/#{@poll.id}/edit?meetings=true", :method => :get, id: 'back_button' do%>
       Edit Poll
     <% end %>
+  </div>
 
+  <div class="inline">
     <%= button_to poll_path, :method => :get, id: 'results_button' do%>
       Results
     <% end %>
