@@ -1,45 +1,70 @@
 </br>
 </br>
-<h1>Results</h1>
+<div class="row">
+  <div class="columnLeft">
+    <h1>Results</h1>
 
-<div style="overflow-y: auto; height: 400px">
-  <table>
-    <tr>
-      <th>Date</th>
-      <th>User</th>
-    </tr>
-    <% @block_data.each do |block| %>
-      <tr>
-        <td><%= block[:time] %></td>
-        <td><%= block[:invitee] %></td>
-      </tr>
-    <% end %>
-  </table>
+    <div style="overflow-y: auto; max-height: 300px; border-radius: 10px; max-width: 550px; box-shadow: rgba(98, 98, 98, 0.23) 0px 3px 6px;">
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>User</th>
+        </tr>
+        <% @block_data.each do |block| %>
+          <tr>
+            <td><%= block[:time] %></td>
+            <td><%= block[:invitee] %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <br>
+    <div>
+      <div class="inline">
+        <%= button_to "#{@poll.id}/invitees", :method => :get, id: 'invite_button' do%>
+          Invite
+        <% end %>
+      </div>
+
+      <div class="inline">
+        <%= button_to "/polls/#{@poll.id}/remind", :method => :post, id: 'remind_button' do%>
+          Remind
+        <% end %>
+      </div>
+
+      <div class="inline">
+        <%= button_to polls_path, :method => :get, id: 'back_button' do%>
+          Back
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="columnRight">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div style="overflow-y: auto; max-height: 400px; border-radius: 10px; max-width: 550px; box-shadow: rgba(98, 98, 98, 0.23) 0px 3px 6px;">
+      <table>
+        <tr>
+          <th>Email</th>
+          <th>Votes Left</th>
+        </tr>
+        <% @invitee_info.each do |invitee| %>
+          <tr>
+            <td style="width: 200px"><%= invitee[:email] %></td>
+            <td><%= invitee[:votes_left] %></td>
+            <td><%= link_to '', Invitee.find(invitee[:id]), :method => :delete, :class => 'close'%></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
 </div>
 
-<div style="overflow-y: auto; height: 400px">
-  <table>
-    <tr>
-      <th>Email</th>
-      <th>Votes Left</th>
-    </tr>
-    <% @invitee_info.each do |invitee| %>
-      <tr>
-        <td><%= invitee[:email] %></td>
-        <td><%= invitee[:votes_left] %></td>
-        <td><%= link_to '', Invitee.find(invitee[:id]), :method => :delete, :class => 'close'%></td>
-      </tr>
-    <% end %>
-  </table>
-</div>
 
-<%= button_to polls_path, :method => :get, id: 'back_button' do%>
-  Back
-<% end %>
 
-<%= button_to "#{@poll.id}/invitees", :method => :get, id: 'invite_button' do%>
-  Invite
-<% end %>
 
 <%= button_to "/polls/#{@poll.id}/remind", :method => :post, id: 'remind_button' do%>
   Remind
