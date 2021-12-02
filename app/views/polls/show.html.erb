@@ -27,7 +27,7 @@
       <tr>
         <td><%= invitee[:email] %></td>
         <td><%= invitee[:votes_left] %></td>
-        <td><%= link_to '', invitee, :method => :delete, :class => 'close'%></td>
+        <td><%= link_to '', Invitee.find(invitee[:id]), :method => :delete, :class => 'close'%></td>
       </tr>
     <% end %>
   </table>
@@ -35,4 +35,12 @@
 
 <%= button_to polls_path, :method => :get, id: 'back_button' do%>
   Back
+<% end %>
+
+<%= button_to "#{@poll.id}/invitees", :method => :get, id: 'invite_button' do%>
+  Invite
+<% end %>
+
+<%= button_to "", :method => :get, id: 'remind_button' do%>
+  Remind
 <% end %>

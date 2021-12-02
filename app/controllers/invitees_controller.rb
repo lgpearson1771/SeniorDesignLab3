@@ -13,11 +13,10 @@ class InviteesController < ApplicationController
 
   def destroy
     invitee = Invitee.find(params[:id])
-    poll = invitee.poll
     invitee.blocks.each do |block|
       invitee.delete(block)
     end
-
-    redirect_to "/polls/#{poll.id}/invitees"
+    invitee.delete
+    redirect_to :back
   end
 end

@@ -98,13 +98,16 @@ class PollsController < ApplicationController
     @poll.timeslots.each do |timeslot|
       timeslot.blocks.each do |block|
         block.invitees.each do |invitee|
-          @block_data.append({time: "#{block.start} - #{block.end}", invitee: invitee.email})
+          @block_data.append({time: "#{block.timeslot.day.strftime("%m/%d/%Y")} #{block.start} - #{block.end}", invitee: invitee.email})
+        end
+        if block.invitees.length == 0
+          @block_data.append({time: "#{block.timeslot.day.strftime("%m/%d/%Y")} #{block.start} - #{block.end}", invitee: ''})
         end
       end
     end
     @invitee_info = []
     @poll.invitees.each do |invitee|
-      @invitee_info.append({votes_left: "#{invitee.votes_left}/#{invitee.poll.votes_per_user}", email: invitee.email})
+      @invitee_info.append({votes_left: "#{invitee.votes_left}/#{invitee.poll.votes_per_user}", email: invitee.email, id: invitee.id})
     end
   end
 end
