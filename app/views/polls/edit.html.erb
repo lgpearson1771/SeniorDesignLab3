@@ -25,6 +25,7 @@
         <%= text_field(:poll, :votes_per_timeslot, required: true) %>
 
         <%= label_tag(:timezone_label, "Timezone") %>
+
         <br>
         <%= select(:poll, :timezone, [ ['Eastern (UTC-05:00)', "EDT"],
                                        ['Central (UTC-06:00)', "CDT"],
@@ -33,6 +34,18 @@
                                        ['Alaskan (UTC-09:00)', "ADT"],
                                        ['Hawaiian (UTC-10:00)', "HST"]], required: true) %>
         <br>
+
+        <%= label_tag(:votes_per_timeslot_label, "Deadline (optional)") %>
+        <%= check_box :poll, :deadline_enable, :checked =>
+          if @poll.deadline.nil? then "unchecked" else "checked" end, :onclick => "$('#deadline_display').toggle()" %>
+
+        <%#= text_field(:poll, :deadline) %>
+        <div id="deadline_display" style="display: <%=  if @poll.deadline.nil? then "none" else "block" end %>">
+
+
+        <%= datetime_select(:poll, :deadline, id: :deadline, ) %>
+        </div>
+
         <br>
         <div class="inline">
           <div class="inline">

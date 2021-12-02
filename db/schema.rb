@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211202011205) do
+ActiveRecord::Schema.define(version: 20211202145409) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
@@ -43,14 +43,15 @@ ActiveRecord::Schema.define(version: 20211202011205) do
   add_index "invitees", ["poll_id"], name: "index_invitees_on_poll_id"
 
   create_table "polls", force: :cascade do |t|
-    t.string  "title"
-    t.string  "description"
-    t.string  "timezone"
-    t.string  "location"
-    t.integer "votes_per_user"
-    t.integer "votes_per_timeslot"
-    t.integer "admin_id"
-    t.boolean "published"
+    t.string   "title"
+    t.string   "description"
+    t.string   "timezone"
+    t.string   "location"
+    t.integer  "votes_per_user"
+    t.integer  "votes_per_timeslot"
+    t.integer  "admin_id"
+    t.boolean  "published"
+    t.datetime "deadline"
   end
 
   create_table "timeslots", force: :cascade do |t|
