@@ -99,10 +99,10 @@
               <%= time_select(:start, :start_time, form: "add_new_poll", minute_step: 5, start_hour: 1, end_hour: 12, :style => "width: 85px !important", class: 'inline', id: 'start_select') %>
               <div class="inline">
                 <%= radio_button :AM_PM_start, :select, "AM", form: "add_new_poll", :checked =>
-                  "unchecked"%>
+                  "unchecked", class: 'change_time'%>
                 <%= label(:end_label, "AM") %>
                 <%= radio_button :AM_PM_start, :select, "PM", form: "add_new_poll", :checked =>
-                  "checked"%>
+                  "checked", class: 'change_time'%>
                 <%= label(:end_label, "PM") %>
               </div>
             </div>
@@ -114,11 +114,11 @@
               <%= time_select(:end, :end_time, form: "add_new_poll", minute_step: 5, start_hour: 1, end_hour: 12, id: 'end_select') %>
               <div class="inline">
                 <%= radio_button :AM_PM_end, :select, "AM", form: "add_new_poll", :checked =>
-                  "unchecked"%>
+                  "unchecked", class: 'change_time'%>
                 <%= label(:end_label, "AM") %>
 
                 <%= radio_button :AM_PM_end, :select, "PM", form: "add_new_poll", :checked =>
-                  "checked"%>
+                  "checked", class: 'change_time'%>
                 <%= label(:end_label, "PM") %>
               </div>
             </div>
@@ -128,7 +128,7 @@
             <div class="inline">
               <div class="inline">
                 <%= radio_button :time_blocks, :select, "blocks", form: "add_new_poll", :checked =>
-                  "checked", :onclick => "document.getElementById('times_times').disabled = true;document.getElementById('blocks').disabled = false;document.getElementById('times').value = '';" %>
+                  "checked", :onclick => "document.getElementById('times_times').disabled = true;document.getElementById('blocks').disabled = false;document.getElementById('times').value = '';"%>
                 <%= label(:end_label, "Blocks") %>
               </div>
               <div class="inline">
@@ -145,7 +145,7 @@
                   "unchecked", :onclick => "document.getElementById('times_times').disabled = false;document.getElementById('blocks').disabled = true;document.getElementById('blocks').value = '';" %>
                 <%= label(:end_label, "Times") %>
               </div>
-              <%= select :times, :times , [['5', 5], ['10', 10], ['15', 15], ['20',20],['25',25],['30',90],['105',105],['120',120]],{}, {disabled:true}%>
+              <%= select :times, :times , [],{}, {disabled:true}%>
               <%= hidden_field_tag :poll_id, @poll.id %>
             </div>
             <br>
@@ -189,7 +189,7 @@
     evt.preventDefault();
     location.href = 'invitees';
   });
-  $('#start_start_time_4i,#start_start_time_5i,#end_end_time_4i,#end_end_time_5i').on('change',function(evt) {
+  $('#start_start_time_4i,#start_start_time_5i,#end_end_time_4i,#end_end_time_5i, .change_time').on('change',function(evt) {
     alert('hi');
     var startHour = parseInt(document.getElementById('start_start_time_4i').value);
     var startMinute = parseInt(document.getElementById('start_start_time_5i').value);
