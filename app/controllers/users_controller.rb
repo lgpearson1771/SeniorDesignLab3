@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :check_deadline, except: [:error, :thanks]
   before_action :verify_published, except: [:error, :thanks]
   before_action :verify_user, except: [:login, :check_login, :error]
 
@@ -322,6 +323,27 @@ class UsersController < ApplicationController
     if @poll.nil? || !@poll.published
       return redirect_to users_error_path
     end
+  end
+
+  def check_deadline
+    @poll = Poll.find_by_id(params[:id])
+
+    if @poll.deadline.nil?
+      return
+    end
+
+    timezone = @poll.timezone
+    print(timezone)
+    offset = Time.zone_offset(timezone)
+    deadline = @poll.deadline
+    adjusted_deadline = deadline - (offset / 3600).hours
+
+    if adjusted_deadline < DateTime.now.utc
+      @poll.published = false
+      @poll.save
+      redirect_to users_error_path
+    end
+
   end
 
   def error
