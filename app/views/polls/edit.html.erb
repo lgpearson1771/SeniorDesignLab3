@@ -168,8 +168,18 @@
               <% @timeslots.each do |timeslot| %>
                 <tr>
                   <td><%= timeslot.day %></td>
-                  <td><%= timeslot.start %></td>
-                  <td><%= timeslot.end %></td>
+                  <td><%if timeslot.start.split(':',2)[0].to_i > 12 %>
+                        <%=(timeslot.start.split(':',2)[0].to_i - 12).to_s + ':' + timeslot.start.split(':',2)[1]%> PM
+                      <%else %>
+                        <%=(timeslot.start.split(':',2)[0].to_i).to_s + ':' + timeslot.start.split(':',2)[1] %> AM
+                      <%end %>
+                  </td>
+                  <td><%if timeslot.end.split(':',2)[0].to_i  > 12 %>
+                      <%=(timeslot.end.split(':',2)[0].to_i - 12).to_s + ':' + timeslot.end.split(':',2)[1]%> PM
+                    <%else %>
+                      <%=(timeslot.end.split(':',2)[0].to_i).to_s + ':' + timeslot.end.split(':',2)[1] %> AM
+                    <%end %>
+                  </td>
                   <td><%= timeslot.blocks.length %></td>
                   <td><%= link_to '', timeslot, :method => :delete, :class => 'close'%> </td>
                 </tr>
