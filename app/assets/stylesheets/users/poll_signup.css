@@ -22,12 +22,12 @@
   grid-template-columns: auto auto auto auto;
   grid-auto-rows: 40px;
   grid-gap: 1px 0px;
-  background-color: #e0e0e0;
+  background-color: #cacaca;
   padding: 20px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 25px;
   overflow: auto;
-  height: 70vh;
+  height: 60vh;
 }
 
 .grid-container > div {
@@ -76,5 +76,34 @@
 }
 body {
  max-width: 75vw;
+}
+
+
+.hover2{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.hover2:after {
+  content: 'Display »';
+  font-size: 1vw;
+  position: absolute;
+  opacity: 0;
+  bottom:0;
+  right:0;
+  padding: 10px;
+  transition: 0.5s;
+}
+
+.hover2:hover{
+  padding-right: 24px;
+  padding-left:8px;
+}
+
+.hover2:hover:after {
+  opacity: 1;
+  right: 10px;
 }
 

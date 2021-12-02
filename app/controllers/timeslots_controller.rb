@@ -34,6 +34,13 @@ class TimeslotsController < ApplicationController
     else
       interval = params['times']['times'].to_i
     end
+
+    if end_time < start
+      flash[:warning] = 'end time cannot be before start time'
+      redirect_to "/polls/#{params[:poll_id]}/edit?meetings=true"
+      return
+    end
+
     if interval % 15 != 0
       flash[:warning] = 'no'
       redirect_to "/polls/#{params[:poll_id]}/edit?meetings=true"
