@@ -60,7 +60,8 @@ class Poll < ActiveRecord::Base
                     domain: 'localhost.localdomain'
                   },
                   subject: "Reminder to sign-up for #{poll.title}",
-                  body: "You have #{invitee.votes_left} out of #{poll.votes_per_user} votes left in the poll!"
+                  body: "You have #{invitee.votes_left} out of #{poll.votes_per_user} votes left in the poll!
+                         login and use your remaining votes here: 'http://localhost:3000/users/login/#{poll.id}'"
       })
     end
   end
