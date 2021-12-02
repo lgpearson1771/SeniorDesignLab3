@@ -14,7 +14,7 @@ class InviteesController < ApplicationController
   def destroy
     invitee = Invitee.find(params[:id])
     invitee.blocks.each do |block|
-      invitee.delete(block)
+      invitee.blocks.delete(block)
     end
     invitee.delete
     redirect_to :back
