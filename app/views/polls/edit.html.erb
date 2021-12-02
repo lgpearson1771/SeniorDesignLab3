@@ -96,7 +96,7 @@
             <%= label(:start_label, "Start Time") %>
             <br>
             <div class="inline">
-              <%= time_select(:start, :start_time, form: "add_new_poll", minute_step: 15, start_hour: 1, end_hour: 12, :style => "width: 85px !important", class: 'inline') %>
+              <%= time_select(:start, :start_time, form: "add_new_poll", minute_step: 5, start_hour: 1, end_hour: 12, :style => "width: 85px !important", class: 'inline', id: 'start_select') %>
               <div class="inline">
                 <%= radio_button :AM_PM_start, :select, "AM", form: "add_new_poll", :checked =>
                   "unchecked"%>
@@ -111,7 +111,7 @@
             <%= label(:end_label, "End Time") %>
             <br>
             <div class="inline">
-              <%= time_select(:end, :end_time, form: "add_new_poll", minute_step: 15, start_hour: 1, end_hour: 12) %>
+              <%= time_select(:end, :end_time, form: "add_new_poll", minute_step: 5, start_hour: 1, end_hour: 12, id: 'end_select') %>
               <div class="inline">
                 <%= radio_button :AM_PM_end, :select, "AM", form: "add_new_poll", :checked =>
                   "unchecked"%>
@@ -145,7 +145,7 @@
                   "unchecked", :onclick => "document.getElementById('times_times').disabled = false;document.getElementById('blocks').disabled = true;document.getElementById('blocks').value = '';" %>
                 <%= label(:end_label, "Times") %>
               </div>
-              <%= select :times, :times , [['15', 15], ['30', 30], ['45', 45], ['60',60],['75',75],['90',90],['105',105],['120',120]],{}, {disabled:true}%>
+              <%= select :times, :times , [['5', 5], ['10', 10], ['15', 15], ['20',20],['25',25],['30',90],['105',105],['120',120]],{}, {disabled:true}%>
               <%= hidden_field_tag :poll_id, @poll.id %>
             </div>
             <br>
@@ -188,5 +188,43 @@
   $('#invitee_button').on('click',function(evt) {
     evt.preventDefault();
     location.href = 'invitees';
+  });
+  $('#start_start_time_4i,#start_start_time_5i,#end_end_time_4i,#end_end_time_5i').on('change',function(evt) {
+    alert('hi');
+    var startHour = parseInt(document.getElementById('start_start_time_4i').value);
+    var startMinute = parseInt(document.getElementById('start_start_time_5i').value);
+    var endHour = parseInt(document.getElementById('end_end_time_4i').value);
+    var endMinute = parseInt(document.getElementById('end_end_time_5i').value);
+
+    var startIsPM = document.getElementById('AM_PM_start_select_pm').checked;
+    var endIsPM = document.getElementById('AM_PM_end_select_pm').checked;
+    if(startIsPM){
+      startHour += 12;
+    }
+    else{
+      if(startHour === 12){
+        startHour -= 12;
+      }
+    }
+    if(endIsPM){
+      endHour += 12;
+    }
+    else{
+      if(endHour === 12){
+        endHour -= 12;
+      }
+    }
+
+    var timeInterval = endHour* 60 - startHour*60 + endMinute - startMinute;
+    var select = document.getElementById('times_times');
+    $("#times_times").empty();
+    for (var i = 5; i<= timeInterval; i += 5){
+      var opt = document.createElement('option');
+      if(timeInterval % i === 0){
+        opt.value = i;
+        opt.innerHTML = i + " minutes";
+        select.appendChild(opt);
+      }
+    }
   });
 </script>
