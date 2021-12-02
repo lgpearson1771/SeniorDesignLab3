@@ -133,4 +133,12 @@ class PollsController < ApplicationController
 
     redirect_to :back
   end
+
+  def publish
+    poll = Poll.find(params[:id])
+    poll.published = params[:publish] == 'true'
+    poll.save
+    render :json => ''
+  end
+
 end
