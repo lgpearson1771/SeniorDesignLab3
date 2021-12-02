@@ -138,7 +138,13 @@ class PollsController < ApplicationController
     poll = Poll.find(params[:id])
     poll.published = params[:publish] == 'true'
     poll.save
+    begin
+      if params[:publish] == 'true'
+        Poll.send_emails(params[:id])
+      end
+    rescue ArgumentError => e
+      # Ignored
+    end
     render :json => ''
   end
-
 end
