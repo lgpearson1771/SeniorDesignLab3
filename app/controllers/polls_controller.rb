@@ -162,7 +162,7 @@ class PollsController < ApplicationController
       Poll.remind_partial(remind_list)
     end
 
-    redirect_to :back
+    render :json => {}
   end
 
   def publish
