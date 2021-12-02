@@ -14,7 +14,15 @@ class PollsController < ApplicationController
       end
     end
     if params[:commit] == 'Publish'
+      @poll = Poll.find(params[:publish])
+      @poll.published = true
+      @poll.save
       Poll.send_emails(params[:publish])
+    end
+    if params[:commit] == 'Close'
+      @poll = Poll.find(params[:close])
+      @poll.published = false
+      @poll.save
     end
     if params[:commit] == 'Delete'
       poll = Poll.where(id: params[:delete])[0]

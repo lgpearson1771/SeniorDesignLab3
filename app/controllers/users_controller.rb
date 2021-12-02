@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_action :verify_user, except: [:login, :check_login]
+  before_action :verify_published, except: [:error]
+  before_action :verify_user, except: [:login, :check_login, :error]
+
 
   def poll
     #   <div class="item1" style="grid-column: column-pos / span column-width; grid-row: row-pos / span row-length;">Content</div>
@@ -299,5 +301,16 @@ class UsersController < ApplicationController
     unless params[:id].nil? || @poll.invitees.find_by_id(@user.id)
       return redirect_to users_error_path
     end
+  end
+
+  def verify_published
+    @poll = Poll.find_by_id(params[:id])
+    if @poll.nil? || !@poll.published
+      return redirect_to users_error_path
+    end
+  end
+
+  def error
+
   end
 end
