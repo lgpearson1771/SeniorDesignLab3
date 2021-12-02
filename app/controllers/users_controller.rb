@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-  before_action :verify_user, except: [:login, :check_login]
+  before_action :verify_published, except: [:error, :thanks]
+  before_action :verify_user, except: [:login, :check_login, :error]
+
+
 
   def poll
     #   <div class="item1" style="grid-column: column-pos / span column-width; grid-row: row-pos / span row-length;">Content</div>
@@ -18,13 +21,14 @@ class UsersController < ApplicationController
     @timeslots = @poll.timeslots.all
     # @timeslots.sort_by { |obj| obj.start }
     @timeslots = @timeslots.sort{ |a,b| (a.day == b.day) ? a.start <=> b.start : a.day <=> b.day }
-    @min_time= 60*23 + 45
+    @min_time= 60*24
     @max_time= 0
+    @min_duration = nil # Invitee.time_interval
 
     @timeslots.each do |time|
       unless @calendar.key?(time.day)
         @calendar[time.day] = {
-          min_time: 60*23 + 45,
+          min_time: 60 * 24,
           max_time: 0
         }
       end
@@ -41,9 +45,20 @@ class UsersController < ApplicationController
       if get_time(time.end) > @max_time
         @max_time = get_time(time.end)
       end
+
+      blocks = time.blocks
+      blocks.each do |block|
+        if @min_duration.nil?
+          @min_duration = get_time(block.end) - get_time(block.start)
+        else
+          @min_duration =  (get_time(block.end) - get_time(block.start)).gcd(@min_duration)
+        end
+      end
     end
 
-    @max_time = @max_time + 15
+    Invitee.time_interval = @min_duration
+
+    @max_time = @max_time + @min_duration
 
 
     prev_time = nil
@@ -62,10 +77,12 @@ class UsersController < ApplicationController
         elsif block.invitees.length < @poll.votes_per_timeslot
           id = block.id
           booked = false
+
         else
           id = nil
           booked = true
         end
+
 
         if ! @calendar[time.day].key?(:times)
 
@@ -80,9 +97,9 @@ class UsersController < ApplicationController
           #                                   id: nil}
           # end
           if !prev_day.nil? && prev_time < @max_time
-            (prev_time..( @max_time-15)).step(15) do |t|
+            (prev_time..( @max_time-Invitee.time_interval)).step(Invitee.time_interval) do |t|
               @calendar[prev_day][:times] << {column: day_count - 1,
-                                              row: (t-@min_time)/15 + 1 + 1,
+                                              row: (t-@min_time)/Invitee.time_interval + 1 + 1,
                                               duration: 1,
                                               id: nil}
             end
@@ -97,9 +114,9 @@ class UsersController < ApplicationController
           #                                   id: nil}
           # end
           unless start_time - @min_time == 0
-            (@min_time..(start_time-15)).step(15) do |t|
+            (@min_time..(start_time-Invitee.time_interval)).step(Invitee.time_interval) do |t|
               @calendar[time.day][:times] << {column: day_count,
-                                              row: (t-@min_time)/15 + 1 + 1,
+                                              row: (t-@min_time)/Invitee.time_interval + 1 + 1,
                                               duration: 1,
                                               id: nil}
             end
@@ -108,8 +125,8 @@ class UsersController < ApplicationController
 
 
           @calendar[time.day][:times] << {column: day_count,
-                                          row: (start_time - @min_time) / 15 + 1 + 1,
-                                          duration: (end_time - start_time) / 15,
+                                          row: (start_time - @min_time) / Invitee.time_interval + 1 + 1,
+                                          duration: (end_time - start_time) / Invitee.time_interval,
                                           id: id,
                                           booked: booked,
                                           reserved: reserved}
@@ -120,9 +137,9 @@ class UsersController < ApplicationController
           end_time = get_time(block.end)
 
           if prev_time != start_time
-            (prev_time..(start_time-15)).step(15) do |t|
+            (prev_time..(start_time-Invitee.time_interval)).step(Invitee.time_interval) do |t|
               @calendar[time.day][:times] << {column: day_count,
-                                              row: (t-@min_time)/15 + 1 + 1,
+                                              row: (t-@min_time)/Invitee.time_interval + 1 + 1,
                                               duration: 1,
                                               id: nil}
             end
@@ -137,8 +154,8 @@ class UsersController < ApplicationController
 
 
           @calendar[time.day][:times] << {column: day_count,
-                                          row: (start_time - @min_time) / 15 + 1 + 1,
-                                          duration: (end_time - start_time) / 15,
+                                          row: (start_time - @min_time) / Invitee.time_interval + 1 + 1,
+                                          duration: (end_time - start_time) / Invitee.time_interval,
                                           id: id,
                                           booked: booked,
                                           reserved: reserved}
@@ -151,9 +168,9 @@ class UsersController < ApplicationController
     end
 
     if !prev_day.nil? && prev_time < @max_time
-      (prev_time..(@max_time-15)).step(15) do |t|
+      (prev_time..(@max_time-Invitee.time_interval)).step(Invitee.time_interval) do |t|
         @calendar[prev_day][:times] << {column: day_count,
-                                        row: (t-@min_time)/15 + 1 + 1,
+                                        row: (t-@min_time)/Invitee.time_interval + 1 + 1,
                                         duration: 1,
                                         id: nil}
       end
@@ -169,7 +186,6 @@ class UsersController < ApplicationController
 
 
     print("HERE")
-
     render 'poll_signup'
   end
 
@@ -300,4 +316,16 @@ class UsersController < ApplicationController
       return redirect_to users_error_path
     end
   end
+
+  def verify_published
+    @poll = Poll.find_by_id(params[:id])
+    if @poll.nil? || !@poll.published
+      return redirect_to users_error_path
+    end
+  end
+
+  def error
+
+  end
+
 end

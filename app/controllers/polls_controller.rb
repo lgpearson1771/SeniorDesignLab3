@@ -14,7 +14,15 @@ class PollsController < ApplicationController
       end
     end
     if params[:commit] == 'Publish'
+      @poll = Poll.find(params[:publish])
+      @poll.published = true
+      @poll.save
       Poll.send_emails(params[:publish])
+    end
+    if params[:commit] == 'Close'
+      @poll = Poll.find(params[:close])
+      @poll.published = false
+      @poll.save
     end
     if params[:commit] == 'Delete'
       poll = Poll.where(id: params[:delete])[0]
@@ -93,6 +101,7 @@ class PollsController < ApplicationController
   end
 
   def show
+    @show_all = (params[:show_all] == 'false' or params[:show_all].nil?)
     @poll = Poll.find(params[:id])
     @block_data = []
     @poll.timeslots.each do |timeslot|
@@ -100,7 +109,7 @@ class PollsController < ApplicationController
         block.invitees.each do |invitee|
           @block_data.append({time: "#{block.timeslot.day.strftime("%m/%d/%Y")} #{block.start} - #{block.end}", invitee: invitee.email})
         end
-        if block.invitees.length == 0
+        if block.invitees.length == 0 and @show_all
           @block_data.append({time: "#{block.timeslot.day.strftime("%m/%d/%Y")} #{block.start} - #{block.end}", invitee: ''})
         end
       end
@@ -123,5 +132,19 @@ class PollsController < ApplicationController
     end
 
     redirect_to :back
+  end
+
+  def publish
+    poll = Poll.find(params[:id])
+    poll.published = params[:publish] == 'true'
+    poll.save
+    begin
+      if params[:publish] == 'true'
+        Poll.send_emails(params[:id])
+      end
+    rescue ArgumentError => e
+      # Ignored
+    end
+    render :json => ''
   end
 end

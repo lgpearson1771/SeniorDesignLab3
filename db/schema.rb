@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20211121233444) do
+ActiveRecord::Schema.define(version: 20211202011205) do
 
   create_table "admins", force: :cascade do |t|
     t.string "username"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20211121233444) do
     t.integer "votes_per_user"
     t.integer "votes_per_timeslot"
     t.integer "admin_id"
+    t.boolean "published"
   end
 
   create_table "timeslots", force: :cascade do |t|

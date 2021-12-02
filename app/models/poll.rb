@@ -33,12 +33,12 @@ class Poll < ActiveRecord::Base
                     port: '587',
                     enable_starttls_auto: true,
                     user_name: 'TheOhmbresSDL3@gmail.com',
-                    password: 'PASSWORD_GOES_HERE',
+                    password: ENV['email_password'],
                     authentication: :login,
                     domain: 'localhost.localdomain'
                   },
                   subject: "Invitation to signup for #{poll.title}",
-                  body: "You have been invited to sign-up for a timeslot(s).
+                  body: "You have been invited to sign-up for a timeslot(s)!
                          Sign-up here: 'http://localhost:3000/users/login/#{poll_id}'"
                 })
     end
@@ -55,12 +55,12 @@ class Poll < ActiveRecord::Base
                     port: '587',
                     enable_starttls_auto: true,
                     user_name: 'TheOhmbresSDL3@gmail.com',
-                    password: 'PASSWORD_GOES_HERE',
+                    password: ENV['email_password'],
                     authentication: :login,
                     domain: 'localhost.localdomain'
                   },
-                  subject: "Reminder to vote in poll #{poll.title}",
-                  body: "You have #{invitee.votes_left} votes out of #{poll.votes_per_user} left in the poll!"
+                  subject: "Reminder to sign-up for #{poll.title}",
+                  body: "You have #{invitee.votes_left} out of #{poll.votes_per_user} votes left in the poll!"
       })
     end
   end

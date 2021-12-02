@@ -66,6 +66,41 @@
 
 
 
+<%= button_to "/polls/#{@poll.id}/remind", :method => :post, id: 'remind_button' do%>
+  Remind
+<% end %>
 
+<%= button_to poll_path, method: :get, params: { show_all: @show_all}, id:'remind_button' do%>
+  <% if @show_all  %>
+    Show Only Reserved
+  <% else %>
+    Show All
+  <% end %>
+<% end %>
 
+<Button id = 'publish'>
+  <% if @poll.published %>
+    Close Poll
+  <% else %>
+    Publish Poll
+  <% end %>
+</Button>
 
+<script type="text/javascript">
+  $('#publish').click(function(evt) {
+    const publish = this.textContent === "Publish Poll";
+    try {
+      $.post(<%=@poll.id.to_s %> +'/publish', {publish: publish},
+        function (returnedData) {});
+    }
+    catch(e) {
+      alert(e);
+    }
+    if(publish){
+      this.textContent = "Close Poll";
+    }
+    else{
+      this.textContent = "Publish Poll";
+    }
+  });
+</script>

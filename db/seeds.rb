@@ -14,7 +14,7 @@ Invitee.create(email: 'phil@gmail.com', votes_left: 2, poll_id: 1)
 
 Admin.create(id: 1, username: 'SirOhmbre', password: '12345')
 Poll.create(id: 1, title: 'Lab3 Checkoff', description: 'Huehnergarth is hard to spell',
-            votes_per_user: 4, votes_per_timeslot: 2, admin_id: 1, timezone: 'CDT', location: 'Seamans Center')
+            votes_per_user: 4, votes_per_timeslot: 2, admin_id: 1, timezone: 'CDT', location: 'Seamans Center', published: true)
 Poll.create(id: 2, title: 'test_poll2', description: 'Huehnergarth is hard to spell',
             votes_per_user: 4, votes_per_timeslot: 2, admin_id: 1, timezone: 'CDT', location: 'Seamans Center')
 Poll.create(id: 3, title: 'test_poll3', description: 'Huehnergarth is hard to spell',
@@ -41,5 +41,7 @@ Block.create(timeslot_id: 4, start: '06:45', end:'07:30')
 
 Block.create(timeslot_id: 5, start: '12:00', end:'14:00')
 
-Invitee.create(email: 'tessa-schmidts@uiowa.edu', votes_left: 4, poll_id: 1)
-Invitee.create(email: 'nick-gorman@uiowa.edu', votes_left: 4, poll_id: 1)
+Invitee.create(email: 'lgpearson@uiowa.edu', votes_left: 4, poll_id: 1)
+
+# Invitee.create(email: 'tessa-schmidts@uiowa.edu', votes_left: 4, poll_id: 1)
+# Invitee.create(email: 'nick-gorman@uiowa.edu', votes_left: 4, poll_id: 1)
