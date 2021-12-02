@@ -56,7 +56,7 @@
 
 <script type="text/javascript">
   $('.edit_poll').on('click',function(evt) {
-    id = (this.id).split('_')[2]
+    const id = (this.id).split('_')[2];
     evt.preventDefault();
     location.href = '/polls/' + id + '/edit?meetings=true';
   });
@@ -68,7 +68,7 @@
       return
     }
     const publish = this.textContent === "Publish";
-    var id = this.id.split('_')[2];
+    const id = this.id.split('_')[2];
     try {
       $.post('polls/' + id +'/publish', {publish: publish},
         function (returnedData) {});
