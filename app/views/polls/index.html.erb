@@ -36,19 +36,13 @@
       <td><%= poll.location %></td>
       <td><%= button_to("Results", "polls/#{poll.id}",:method => :get, id: :poll_results) %></td>
       <td><%= button_to("Edit", "polls/#{poll.id}/edit?meetings=true", :method => :get, class: "edit_poll", id: "edit_poll_#{poll.id}") %></td>
-      <%if poll.published %>
-        <td><%= form_tag( {controller: polls_path, action: :index}, { method: :get }) do %>
-            <%= submit_tag("Close", id: :close_poll,
-                           data: { confirm: "Are you sure you want to close this poll? (You can reopen it at any time)" }) %>
-            <%= hidden_field_tag(:close, poll.id) %>
-          <% end %></td>
-      <% else %>
-        <td><%= form_tag( {controller: polls_path, action: :index}, { method: :get }) do %>
-            <%= submit_tag("Publish", id: :publish_poll,
-                           data: { confirm: "Are you sure you want to publish this poll?" }) %>
-            <%= hidden_field_tag(:publish,  "#{poll.id}".to_sym) %>
-          <% end %></td>
-      <% end %>
+      <td><button class = 'publishButton' id=<%="publish_poll_#{poll.id}"%>>
+        <% if poll.published %>
+          Close
+        <% else %>
+          Publish
+        <% end %>
+        </button></td>
 
       <td><%= form_tag( {controller: polls_path, action: :index}, { method: :get }) do %>
           <%= submit_tag("Delete", id: "delete_poll[#{poll.id}]".to_sym,
@@ -65,5 +59,28 @@
     id = (this.id).split('_')[2]
     evt.preventDefault();
     location.href = '/polls/' + id + '/edit?meetings=true';
+  });
+
+  $('.publishButton').click(function(evt) {
+    evt.preventDefault();
+    const msg = confirm('Are you sure you want to publish this poll? This will email your poll to all invitees');
+    if(!msg){
+      return
+    }
+    const publish = this.textContent === "Publish";
+    var id = this.id.split('_')[2];
+    try {
+      $.post('polls/' + id +'/publish', {publish: publish},
+        function (returnedData) {});
+    }
+    catch(e) {
+      alert(e);
+    }
+    if(publish){
+      this.textContent = "Close";
+    }
+    else{
+      this.textContent = "Publish";
+    }
   });
 </script>
