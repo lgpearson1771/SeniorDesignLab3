@@ -53,7 +53,12 @@
   <% end %>
   </tbody>
 </table>
-
+<style>
+  @keyframes spinner5 {
+    to {
+      transform: rotate(360deg);
+    }}
+</style>
 <script type="text/javascript">
   $('.edit_poll').on('click',function(evt) {
     const id = (this.id).split('_')[2];
@@ -69,6 +74,8 @@
     }
     const publish = this.textContent === "Publish";
     const id = this.id.split('_')[2];
+    $('#publish_poll_' + id).prop('disabled', true);
+
     try {
       $.post('polls/' + id +'/publish', {publish: publish},
         function (returnedData) {
@@ -87,6 +94,7 @@
           else {
             alert('a poll must have at least 1 timeslot before publishing');
           }
+          $('#publish_poll_' + id).prop('disabled', false); //.attr("disabled","disabled");
         });
     }
     catch(e) {

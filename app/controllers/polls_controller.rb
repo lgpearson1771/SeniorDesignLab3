@@ -168,7 +168,7 @@ class PollsController < ApplicationController
   def publish
     poll = Poll.find(params[:id])
     if poll.timeslots.length == 0
-      return render :json => {has_timeslots: false}
+      return render :json => {has_timeslots: false, id: poll.id}
     end
     poll.published = params[:publish] == 'true'
     poll.save
