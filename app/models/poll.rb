@@ -1,7 +1,7 @@
 class Poll < ActiveRecord::Base
   belongs_to :admin
-  has_many :timeslots
-  has_many :invitees
+  has_many :timeslots, :dependent => :destroy
+  has_many :invitees, :dependent => :destroy
 
   validates :title, presence: true
   validates_length_of :title, minimum: 4
