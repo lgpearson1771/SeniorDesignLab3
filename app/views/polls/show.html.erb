@@ -87,6 +87,7 @@
       $.post("/polls/" + <%=@poll.id.to_s %> +'/remind', {id: <%=@poll.id%>},
         function (returnedData) {
           canPublish = returnedData['has_timeslots'];
+          alert('an alert has been sent out to all remaining voters');
         });
     }
     catch(e) {
@@ -103,9 +104,11 @@
           if(canPublish){
             if(publish){
               document.getElementById('publish_poll_' + id).textContent = "Close";
+              alert('the poll has been closed');
             }
             else{
               document.getElementById('publish_poll_' + id).textContent = "Publish";
+              alert('the poll has been published');
             }
           }
           else {

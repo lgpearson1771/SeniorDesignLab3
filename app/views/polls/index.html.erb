@@ -77,9 +77,11 @@
           if(canPublish){
             if(publish){
               document.getElementById('publish_poll_' + id).textContent = "Close";
+              alert('the poll has been published');
             }
             else{
               document.getElementById('publish_poll_' + id).textContent = "Publish";
+              alert('the poll has been closed');
             }
           }
           else {
