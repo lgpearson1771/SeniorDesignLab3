@@ -1,5 +1,7 @@
 class Invitee < ActiveRecord::Base
   has_and_belongs_to_many :blocks
+  before_destroy { blocks.clear }
+
   belongs_to :poll
   @@time_interval = nil
 
