@@ -1,7 +1,11 @@
 class TimeslotsController < ApplicationController
   def create
+    if params["AM_PM_start"]['select'] == "PM" && params["AM_PM_end"]['select'] == "AM"
+      flash[:warning] = 'Start time must be before end time and cannot go past midnight.'
+      return redirect_to "/polls/#{params[:poll_id]}/edit?meetings=true"
+    end
 
-    start_minute = params['start']['start_time(5i)'].to_i
+      start_minute = params['start']['start_time(5i)'].to_i
     end_minute = params['end']['end_time(5i)'].to_i
     start_hour = params['start']['start_time(4i)'].to_i
     end_hour = params['end']['end_time(4i)'].to_i
