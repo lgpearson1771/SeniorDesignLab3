@@ -7,6 +7,13 @@ class InviteesController < ApplicationController
       flash[:warning] = 'Not a valid email address'
       return redirect_to "/polls/#{poll.id}/invitees"
     end
+    poll.invitees.each do |invitee|
+      if invitee.email == email
+        flash[:warning] = "You cannot invite the same email to a poll"
+        return redirect_to "/polls/#{poll.id}/invitees"
+      end
+    end
+
     Invitee.create({votes_left: poll.votes_per_user, email: email, poll_id: poll.id})
     redirect_to "/polls/#{poll.id}/invitees"
   end
