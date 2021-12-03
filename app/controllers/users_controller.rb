@@ -328,7 +328,7 @@ class UsersController < ApplicationController
   def check_deadline
     @poll = Poll.find_by_id(params[:id])
 
-    if @poll.deadline.nil?
+    if @poll.nil? ||  @poll.deadline.nil?
       return
     end
 
