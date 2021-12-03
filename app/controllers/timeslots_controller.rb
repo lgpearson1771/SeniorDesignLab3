@@ -63,17 +63,18 @@ class TimeslotsController < ApplicationController
     day = Date.strptime(params[:date], '%Y-%m-%d')
     timeslot = Timeslot.create(day: day, end: timeslot_end_time, start: timeslot_start_time, poll_id: params[:poll_id])
 
-    print(start)
     (0..(total_minutes - interval)).step(interval) do |number|
-      start_first = number / 60 + start
+      start_first = (number + start_minute) / 60 + start
       start_second = (number + start_minute) % 60
-      end_first = (number + interval) / 60 + start
-      end_second = ((number + interval) + start_minute) % 60
+      end_first = (number + interval + start_minute) / 60 + start
+      end_second = (number + interval+ start_minute) % 60
+
 
       start_first = "0" + start_first.to_s if start_first.to_s.length == 1
       end_first = "0" + end_first.to_s if end_first.to_s.length == 1
       start_second = "0" + start_second.to_s if start_second.to_s.length == 1
       end_second = "0" + end_second.to_s if end_second.to_s.length == 1
+      print "\n\n#{start_first}:#{start_second} - #{end_first}:#{end_second}\n\n"
 
       Block.create(start: "#{start_first}:#{start_second}", end: "#{end_first}:#{end_second}", timeslot_id: timeslot.id)
     end
