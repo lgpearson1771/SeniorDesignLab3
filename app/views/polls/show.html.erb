@@ -95,25 +95,26 @@
   });
   $('#publish').click(function(evt) {
     const publish = this.textContent === "Publish Poll";
-    var canPublish;
     try {
       $.post(<%=@poll.id.to_s %> +'/publish', {publish: publish},
         function (returnedData) {
-          canPublish = returnedData['has_timeslots'];
+          var canPublish = returnedData['has_timeslots'];
+          var id = returnedData['id'];
+          if(canPublish){
+            if(publish){
+              document.getElementById('publish_poll_' + id).textContent = "Close";
+            }
+            else{
+              document.getElementById('publish_poll_' + id).textContent = "Publish";
+            }
+          }
+          else {
+            alert('a poll must have at least 1 timeslot before publishing');
+          }
         });
     }
     catch(e) {
       alert(e);
-    }
-    if(canPublish) {
-      if (publish) {
-        this.textContent = "Close Poll";
-      } else {
-        this.textContent = "Publish Poll";
-      }
-    }
-    else {
-      alert('a poll must have at least 1 timeslot before publishing');
     }
   });
 </script>

@@ -179,6 +179,6 @@ class PollsController < ApplicationController
     rescue ArgumentError => e
       # Ignored
     end
-    render :json => {has_timeslots: true}
+    render :json => {has_timeslots: true, id: poll.id}
   end
 end
