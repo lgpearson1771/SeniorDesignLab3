@@ -43,13 +43,7 @@
       </div>
 
       <div class="inline">
-        <Button id = 'publish'>
-          <% if @poll.published %>
-            Close Poll
-          <% else %>
-            Publish Poll
-          <% end %>
-        </Button>
+        <Button id = 'publish'><% if @poll.published %>Close<% else %>Publish<% end %></Button>
       </div>
 
     </div>
@@ -83,11 +77,15 @@
 
 <script type="text/javascript">
   $('#remindButton').click(function(evt) {
+    $('#remindButton').prop('disabled', true);
+    $("#loading_bar").show()
     try {
       $.post("/polls/" + <%=@poll.id.to_s %> +'/remind', {id: <%=@poll.id%>},
         function (returnedData) {
           canPublish = returnedData['has_timeslots'];
           alert('an alert has been sent out to all remaining voters');
+          $('#remindButton').prop('disabled', false); //.attr("disabled","disabled");
+          $("#loading_bar").hide()
         });
     }
     catch(e) {
@@ -95,7 +93,9 @@
     }
   });
   $('#publish').click(function(evt) {
-    const publish = this.textContent === "Publish Poll";
+    $("#loading_bar").show()
+    const publish = this.textContent === "Publish";
+    $('#publish').prop('disabled', true);
     try {
       $.post(<%=@poll.id.to_s %> +'/publish', {publish: publish},
         function (returnedData) {
@@ -103,17 +103,19 @@
           var id = returnedData['id'];
           if(canPublish){
             if(publish){
-              document.getElementById('publish_poll_' + id).textContent = "Close";
-              alert('the poll has been closed');
+              $('#publish').html( "Close" );
+              alert('the poll has been published');
             }
             else{
-              document.getElementById('publish_poll_' + id).textContent = "Publish";
-              alert('the poll has been published');
+              $('#publish').html("Publish");
+              alert('the poll has been closed');
             }
           }
           else {
             alert('a poll must have at least 1 timeslot before publishing');
           }
+          $('#publish').prop('disabled', false); //.attr("disabled","disabled");
+          $("#loading_bar").hide()
         });
     }
     catch(e) {

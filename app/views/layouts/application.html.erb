@@ -15,6 +15,7 @@
   </div>
 <%end%>
 
+
 <head>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,8 +37,39 @@
   <% elsif flash[:warning]%>
     <div class="warning"><%= flash[:warning]%></div>
   <% end %>
+  <div id="loading_bar" class="grey"><div class="load"></div> loading ... </div>
 </div>
-<% end %>
+  <% end %>
+<style>
+  .grey {
+    margin-top: 70px;
+
+    border-radius: 12px;
+  }
+  .load {
+
+    height: 40px;
+    width: 40px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    border-top: 2px solid #1D9AF2;
+    border-right: 2px solid transparent;
+    border-bottom:none;
+    border-left:none;
+    animation: spinner5 700ms linear infinite;
+    position: fixed;
+  }
+  @keyframes spinner5 {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+  <script>$("#loading_bar").hide()</script>
+
+
+
 
 
 

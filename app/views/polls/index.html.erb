@@ -36,13 +36,7 @@
       <td><%= poll.location %></td>
       <td><%= button_to("Results", "polls/#{poll.id}",:method => :get, id: :poll_results) %></td>
       <td><%= button_to("Edit", "polls/#{poll.id}/edit?meetings=true", :method => :get, class: "edit_poll", id: "edit_poll_#{poll.id}") %></td>
-      <td><button class = 'publishButton' id=<%="publish_poll_#{poll.id}"%>>
-        <% if poll.published %>
-          Close
-        <% else %>
-          Publish
-        <% end %>
-      </button></td>
+      <td><button class = 'publishButton' id=<%="publish_poll_#{poll.id}"%>><% if poll.published %>Close<% else %>Publish<% end %></button></td>
 
       <td><%= form_tag( {controller: polls_path, action: :index}, { method: :get }) do %>
           <%= submit_tag("Delete", id: "delete_poll[#{poll.id}]".to_sym,
@@ -68,11 +62,20 @@
 
   $('.publishButton').click(function(evt) {
     evt.preventDefault();
-    const msg = confirm('Are you sure you want to publish this poll? This will email your poll to all invitees');
-    if(!msg){
-      return
-    }
     const publish = this.textContent === "Publish";
+    if(publish){
+      const msg = confirm('Are you sure you want to ' + this.textContent + ' this poll? This will email your poll to all invitees');
+      if(!msg){
+        return
+      }
+    }
+    else{
+      const msg = confirm('Are you sure you want to ' + this.textContent + ' this poll?');
+      if(!msg){
+        return
+      }
+    }
+
     const id = this.id.split('_')[2];
     $('#publish_poll_' + id).prop('disabled', true);
 
