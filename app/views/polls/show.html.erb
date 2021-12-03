@@ -29,7 +29,7 @@
 
       <div class="inline">
 
-        <button id = 'remindButton'>Remind</button>
+        <button id = 'remindButton'  <%= if @poll.published then "" else "disabled" end%>>Remind</button>
       </div>
 
       <div class="inline">
