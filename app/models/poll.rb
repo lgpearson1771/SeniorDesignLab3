@@ -38,7 +38,7 @@ class Poll < ActiveRecord::Base
                   },
                   subject: "Invitation to signup for #{poll.title}",
                   body: "You have been invited to sign-up for a timeslot(s)!
-                         Sign-up here: 'http://localhost:3000/users/login/#{poll_id}'"
+                         Sign-up here: 'https://doodle-hub.herokuapp.com/users/login/#{poll_id}'"
                 })
     end
   end
@@ -60,7 +60,7 @@ class Poll < ActiveRecord::Base
                   },
                   subject: "Reminder to sign-up for #{poll.title}",
                   body: "You have #{invitee.votes_left} out of #{poll.votes_per_user} votes left in the poll!
-                         login and use your remaining votes here: 'http://localhost:3000/users/login/#{poll.id}'"
+                         login and use your remaining votes here: 'https://doodle-hub.herokuapp.com/users/login/#{poll.id}'"
       })
     end
   end
